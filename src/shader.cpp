@@ -1,4 +1,9 @@
-#include "../common.h"
+#include "common.h"
+
+/*
+* Taken from: http://www.nexcius.net/2012/11/20/how-to-load-a-glsl-shader-in-opengl-using-c/
+* TODO(Mason): Instead of this quick hack, turn this into a set of classes.
+*/
 
 std::string readFile(const char *filePath) {
 	std::string content;

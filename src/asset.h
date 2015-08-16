@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../common.h"
+#include "common.h"
 
 /*
 * Definition for a simple opengl asset prep system.
@@ -32,4 +32,7 @@ public:
 	virtual std::string getName() = 0;
 };
 
-IAsset* assetFromFile(std::string filename);
+/* 
+ * Generates an asset from a file using AssImp and SDL_Image.
+ */
+IAsset* AssetFromFile(std::string filename);

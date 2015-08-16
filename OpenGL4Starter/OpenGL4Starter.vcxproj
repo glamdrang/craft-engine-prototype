@@ -19,22 +19,22 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="common.h" />
-    <ClInclude Include="core.h" />
-    <ClInclude Include="util\asset.h" />
-    <ClInclude Include="util\scene.h" />
-    <ClInclude Include="util\shader.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="app.cpp" />
-    <ClCompile Include="driver.cpp" />
-    <ClCompile Include="util\asset.cpp" />
-    <ClCompile Include="util\scene.cpp" />
-    <ClCompile Include="util\shader.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="..\assets\simple.frag.glsl" />
     <None Include="..\assets\simple.vert.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\app.cpp" />
+    <ClCompile Include="..\src\asset.cpp" />
+    <ClCompile Include="..\src\driver.cpp" />
+    <ClCompile Include="..\src\scene.cpp" />
+    <ClCompile Include="..\src\shader.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\asset.h" />
+    <ClInclude Include="..\src\common.h" />
+    <ClInclude Include="..\src\core.h" />
+    <ClInclude Include="..\src\scene.h" />
+    <ClInclude Include="..\src\shader.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{55E833AF-9459-472B-8D2B-49992817F74D}</ProjectGuid>
@@ -113,10 +113,12 @@
       <AdditionalDependencies>opengl32.lib;glew32.lib;SDL2.lib;SDL2_image.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>ROBOCOPY "$(SolutionDir)\..\vendor\bin\win_x64_vc120" "$(OutDir)\"
+      <Command>ROBOCOPY "$(SolutionDir)\..\vendor\bin\win_x64_vc120" "$(OutDir)\" /njs /ndl /nfl /np /nc /ns
 
 set rce=%errorlevel%
-if not %rce% LSS 4 exit %rce% else exit 0</Command>
+if not %rce% LSS 4 exit %rce%
+
+exit 0</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

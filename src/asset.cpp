@@ -9,29 +9,54 @@ class AssImpAsset : public IAsset
 private:
 	std::string _filename;
 
-	// Assimp scene and general memory buffers loaded
-	bool _assimpLoaded;
-	// Our structure is loaded
-	bool _loaded;
-	// OpenGL memory buffers loaded.
-	bool _glLoaded;
+	/* T:
+	We uses these flags to tell what state our asset is in.
+	*/
+	bool _assimpLoaded; // Assimp scene and general memory buffers loaded
+	bool _loaded; // Our structure is loaded
+	bool _glLoaded; // OpenGL memory buffers loaded.
 
+	/* T:
+	We uses these variables to store the OpenGL ID objects.
+
+	* _glid_bufferArray: is the id of our VAO.
+	* _glid_vertexBuffer: is the id of the VBO containing vertex data in our VAO.
+	* _glid_vertexBuffer: is the id of the IBO containing index data in our VAO.
+	* _glidVec_textures: are the ids of the textures used by our meshes and materials.
+
+	*/
 	GLuint _glid_bufferArray;
 	GLuint _glid_vertexBuffer;
 	GLuint _glid_indexBuffer;
 	std::vector<GLuint> _glidVec_textures;
 
-	size_t _vertexSize;
-	size_t _vertexBufferSize;
-	size_t _indexBufferSize;
-
+	/* T:
+	This describes our on graphics card data structure in both AssImp and glm data types.
+	*/
 	struct _Vertex
 	{
-		aiVector3D pos;
-		aiVector2D tex;
-		aiVector3D norm;
+		union
+		{
+			struct
+			{
+				aiVector3D aipos;
+				aiVector2D aitex;
+				aiVector3D ainorm;
+			};
+			struct
+			{
+				::glm::vec3 pos;
+				::glm::vec2 tex;
+				::glm::vec3 norm;
+			};
+		};
 	};
 
+	/* T:
+	These are internal structure book-keeping of the loaded mesh. We use this for rendering and
+	loading the in-memory data to the graphics card. Relatively light weight. Generated during
+	loading of the in-memory data.
+	*/
 	struct _Mesh
 	{
 		size_t start_vertex;
@@ -60,6 +85,11 @@ private:
 	std::vector<_Texture> _vec_textures;
 	std::vector<_Material> _vec_materials;
 
+	/* T:
+	These are our in memory buffers and the variables we use to track them.
+	*/
+	size_t _vertexBufferSize;
+	size_t _indexBufferSize;
 	std::vector<_Vertex> _vecBuf_verticies;
 	std::vector<unsigned int> _vecBuf_indicies;
 	std::vector<SDL_Surface*> _vecBuf_surfaces;
@@ -97,6 +127,12 @@ public:
 			aiProcess_SortByPType
 			);
 
+		if (!scene)
+		{
+			std::cerr << "Failed to load AssImp mesh \"" << _filename << "\" because:" << std::endl << importer.GetErrorString();
+			return;
+		}
+
 		_vec_meshes.resize(scene->mNumMeshes);
 		for (unsigned int iMesh = 0; iMesh < scene->mNumMeshes; iMesh++)
 		{
@@ -108,11 +144,11 @@ public:
 			{
 				_Vertex v;
 
-				v.pos = ai_mesh.mVertices[iVertex];
+				v.aipos = ai_mesh.mVertices[iVertex];
 				const aiVector3D* tex = ai_mesh.HasTextureCoords(0) ? &ai_mesh.mTextureCoords[0][iVertex] : &Zero3D;
-				v.tex.x = tex->x;
-				v.tex.y = tex->y;
-				v.norm = ai_mesh.HasNormals() ? ai_mesh.mNormals[iVertex] : Zero3D;
+				v.aitex.x = tex->x;
+				v.aitex.y = tex->y;
+				v.ainorm = ai_mesh.HasNormals() ? ai_mesh.mNormals[iVertex] : Zero3D;
 
 				_vecBuf_verticies.push_back(v);
 				_vertexBufferSize += sizeof(_Vertex);
@@ -162,11 +198,11 @@ public:
 					continue;
 				}
 				_vecBuf_surfaces.push_back(image);
-				tex.surface = _vecBuf_surfaces.size() - 1;
+				tex.surface = (unsigned int)(_vecBuf_surfaces.size() - 1);
 
 				_vec_textures.push_back(tex);
 			}
-			mat.texture_diffuse = _vec_textures.size() - 1;
+			mat.texture_diffuse = (unsigned int)(_vec_textures.size() - 1);
 			_vec_materials.push_back(mat);
 		}
 
@@ -187,7 +223,15 @@ public:
 
 	virtual void gl_load()
 	{
-		// Gen and bind BufferArray (VBO)
+		/*
+		Here we load all of our in memory assets into opengl.
+
+		<<Incomplete>>
+
+		For vertex buffers see: https://www.opengl.org/wiki/Vertex_Specification
+		*/
+
+		// Gen and bind BufferArray (VAO)
 		// This is all the meshes.
 		glGenVertexArrays(1, &_glid_bufferArray);
 		glBindVertexArray(_glid_bufferArray);
@@ -237,7 +281,7 @@ public:
 		// Now we stuff all the textures into memory.
 		size_t textures = _vecBuf_surfaces.size();
 		_glidVec_textures.resize(textures);
-		glGenTextures(textures, _glidVec_textures.data());
+		glGenTextures((GLsizei)textures, _glidVec_textures.data());
 
 		for (int i = 0; i < textures; i++)
 		{
@@ -258,24 +302,48 @@ public:
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		}
 
+		glBindTexture(GL_TEXTURE_2D, 0);
+
 		_glLoaded = true;
 	}
 
 	virtual void gl_render()
 	{
+		/* T:
+		Here we have our render function. To reduce load on the CPU and CPU->GPU bus we try to be
+		very efficient in function in our main rendering loop; hence we use only a couple of lines
+		to actually render.
+
+		* `glBindVertexArray`: Sets the VAO to use, which contains the data and configuration for
+		    the vertex and index buffers we generated during openGL load from before. We also clean
+		    up by setting this back to 0 so no stray OpenGL call will affect out VAO state.
+		* `glActiveTexture`: Sets which texture unit to modify, in this case we used `1` for the
+		    diffuse texture wehn we configure the shader in the app, and here when we bind it. We
+		    also clean this up to prevent stray calls from interfering with it. This connects unit
+		    and shader.
+		* `glBindTexture`: Binds our texture to the 2d target for the active unit. This connects
+		    unit and the actual texture buffer (via id).
+		* `glDrawElements`: This draw triangles using the index buffer bound inside out VAO. We
+		    describe the type of primitive (triangle) the number and size of elements (unsigned
+		    int) to construct those primitives from (3 unsigned int index elements would build one
+		    triangle primitive) and where in the buffer to start (typically 0) but we combine all
+		    our meshes, hence we have to know where each starts in the shared buffer.
+
+		*/
 		glBindVertexArray(_glid_bufferArray);
 		for (int i = 0; i < _vec_meshes.size(); i++)
 		{
 			_Mesh& mesh = _vec_meshes[i];
 			glActiveTexture(GL_TEXTURE0 + 1); glBindTexture(GL_TEXTURE_2D, _glidVec_textures[_vec_materials[mesh.material].texture_diffuse]);
-			glActiveTexture(GL_TEXTURE0);
-			glDrawElements(GL_TRIANGLES, mesh.length_element, GL_UNSIGNED_INT, (void*)mesh.start_index);
+			glDrawElements(GL_TRIANGLES, (GLsizei)mesh.length_element, GL_UNSIGNED_INT, (void*)mesh.start_index);
 		}
+		glActiveTexture(GL_TEXTURE0);
 		glBindVertexArray(0);
 	}
 
 	virtual void gl_unload()
 	{
+		glDeleteTextures((GLsizei)_glidVec_textures.size(), _glidVec_textures.data());
 		glDeleteBuffers(2, &_glid_vertexBuffer);
 		glDeleteVertexArrays(1, &_glid_bufferArray);
 		_glLoaded = false;
@@ -296,7 +364,7 @@ public:
 	}
 };
 
-IAsset* assetFromFile(std::string filename)
+IAsset* AssetFromFile(std::string filename)
 {
 	return new AssImpAsset(filename);
 }

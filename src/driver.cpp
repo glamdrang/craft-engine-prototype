@@ -1,7 +1,7 @@
 #include "core.h"
 
 /******************************************************************************
-** Init
+** Library Init/Quit Helpers
 ******************************************************************************/
 
 void init_sdl()
@@ -37,7 +37,7 @@ void init_glew()
 }
 
 /******************************************************************************
-** Misc
+** Misc Helpers
 ******************************************************************************/
 
 Window* new_sdlWindow()
@@ -94,9 +94,24 @@ void mainLoop(IApp* app, Window* win)
 {
 	SDL_Event event;
 
+	// Turn on VSync
+	SDL_GL_SetSwapInterval(1);
+
 	bool running = true;
 	while (running)
 	{
+		/* T:
+		Here is our main loop.
+		
+		First we have the app draw the scene (this replaces the current back buffer). Then we swap
+		buffers so the back buffer is displayed and the front buffer becomes the back buffer (to be
+		drawn over in the next call).
+		
+		Next we poll for system events given to our application or window. We have a hardcoded quit
+		for window or application quit events to not run the next fram. We forward all events to
+		the app.
+
+		*/
 		app->draw();
 		SDL_GL_SwapWindow(win->sdlwindow);
 
@@ -112,7 +127,8 @@ void mainLoop(IApp* app, Window* win)
 }
 
 // For macros: http://sourceforge.net/p/predef/wiki/OperatingSystems/
-#ifdef false _WIN32
+// Remove `0 && ` to make a pure graphical app on windows (no terminal)
+#if 0 && defined(_WIN32)
 #include <Windows.h>
 int CALLBACK WinMain(
 	_In_ HINSTANCE hInstance,
@@ -128,9 +144,9 @@ int main(int argc, char** argv)
 
 	// Init libraries
 	init_sdl();
-	win = new_sdlWindow(); // Inits the GLContext
+	win = new_sdlWindow(); // Also inits the GLContext
 
-	init_glew(); // Requires GL context to init
+	init_glew(); // Requires GL context to inited by window.
 
 	// User code
 	app->init(win);
