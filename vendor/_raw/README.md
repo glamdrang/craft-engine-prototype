@@ -10,15 +10,10 @@ Included is the list of expected/supported sources (and their `destination/folde
 
 * `{arch}`: Architecture
     * `x86` (32 bit)
-    * `x86_64`
+    * `x64`
 
-* `{os}`: Operating system
-    * `win`
-    * `linux`
-    * `osx`
-
-* `{toolchain}`: Runtime/Toolchain Expected
-    * `vc***` Visual C (Visual Studio), where *** is the specific version (e.g. 100). `t` is a special version (`vct` means msvcrt runtime is used). And `_` means runtime independent (`vc_` means compiled with visual studio but runtime independent).
+* `{toolchain}`: Runtime/Toolchain Expected, also implies `os`.
+    * `vc***` Visual C (Visual Studio), where *** is the specific version (e.g. 100). `t` is a special version (`vct` means msvcrt runtime is used). And `` means runtime independent (`vc` means compiled with visual studio but runtime independent). Always a `win` operating system.
 
 * `{version}`: Pull this foldername for version of libraries.
 
@@ -34,8 +29,8 @@ Included is the list of expected/supported sources (and their `destination/folde
     * Development Libraries `glew/dev/{toolchain}/{version}`
   
 * assimp ([downloads](http://assimp.sourceforge.net/main_downloads.html))
-    * Development Source `assimp/source/{version}` (uses **CMake**)
-    * Development Builds `assimp/build/{toolchain}/{version}`
+    * Development Source `assimp/source/{version}` (uses **CMake**, must be done manually)
+    * Development Builds `assimp/build/{version}/{toolchain}/`
   
 * glm ([site](http://glm.g-truc.net/0.9.7/index.html)). Headers only.
     * Source `glm/{version}`

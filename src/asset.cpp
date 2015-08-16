@@ -22,7 +22,7 @@ private:
 	* _glid_bufferArray: is the id of our VAO.
 	* _glid_vertexBuffer: is the id of the VBO containing vertex data in our VAO.
 	* _glid_vertexBuffer: is the id of the IBO containing index data in our VAO.
-	* _glidVec_textures: are the ids of the textures used by our meshes and materials.
+	* _glidVec_textures: are the ids of the textures used by materials.
 
 	*/
 	GLuint _glid_bufferArray;
@@ -311,8 +311,8 @@ public:
 	{
 		/* T:
 		Here we have our render function. To reduce load on the CPU and CPU->GPU bus we try to be
-		very efficient in function in our main rendering loop; hence we use only a couple of lines
-		to actually render.
+		very efficient in our function calls in our main rendering loop; hence we use only a couple
+		of lines to actually render.
 
 		* `glBindVertexArray`: Sets the VAO to use, which contains the data and configuration for
 		    the vertex and index buffers we generated during openGL load from before. We also clean
@@ -323,11 +323,11 @@ public:
 		    and shader.
 		* `glBindTexture`: Binds our texture to the 2d target for the active unit. This connects
 		    unit and the actual texture buffer (via id).
-		* `glDrawElements`: This draw triangles using the index buffer bound inside out VAO. We
-		    describe the type of primitive (triangle) the number and size of elements (unsigned
-		    int) to construct those primitives from (3 unsigned int index elements would build one
-		    triangle primitive) and where in the buffer to start (typically 0) but we combine all
-		    our meshes, hence we have to know where each starts in the shared buffer.
+		* `glDrawElements`: This draws triangles using the index buffer bound inside our VAO. We
+		    describe the type of the primitive (triangle) the number and size of elements (unsigned
+		    int) to construct those primitives from (3 unsigned int index elements will build one
+		    triangle primitive) and where in the buffer to start (typically 0, but we combine all
+		    our meshes, hence we have to know where each starts in the shared buffer).
 
 		*/
 		glBindVertexArray(_glid_bufferArray);
