@@ -105,6 +105,7 @@ public:
 
 	virtual void load()
 	{
+
 		_vertexBufferSize = 0;
 		_indexBufferSize = 0;
 
@@ -132,6 +133,12 @@ public:
 			std::cerr << "Failed to load AssImp mesh \"" << _filename << "\" because:" << std::endl << importer.GetErrorString();
 			return;
 		}
+
+		/* T:
+		This uses the AssImp structure to import data into two buffers. A vertex buffer containing
+		per-vertex data. And an index buffer containing the indicies into that vertex buffer.
+
+		*/
 
 		_vec_meshes.resize(scene->mNumMeshes);
 		for (unsigned int iMesh = 0; iMesh < scene->mNumMeshes; iMesh++)
@@ -174,6 +181,12 @@ public:
 			mesh.material = ai_mesh.mMaterialIndex;
 			_vec_meshes[iMesh] = mesh;
 		}
+
+		/* T:
+		This uses the AssImp structure and SDL_Image to import texture resources into a list of
+		textures.
+
+		*/
 
 		_vec_materials.resize(scene->mNumMaterials);
 		for (unsigned int iMaterial = 0; iMaterial < scene->mNumMaterials; iMaterial++)
@@ -223,12 +236,38 @@ public:
 
 	virtual void gl_load()
 	{
-		/*
-		Here we load all of our in memory assets into opengl.
+		/* T:
+		Here we load all of our in memory assets into opengl. We store all of the meshes as a
+		single large mesh. We split a mesh into two parts. The first is the per vertex data
+		which includes things like model space position, texture coordinates, and normals, this is
+		stored in a Vertex Buffer Object (VBO). The other part is the list of triangles as indices
+		into the vertex buffer, three indices make one triangle, this is stored in a variation of
+		a VBO (for historical reasons) sometimes called an Index Buffer Object (IBO).
 
-		<<Incomplete>>
+		The storage of this information is a single call to `glBufferData` which describes to
+		OpenGL how the data will change (and hence how to store it) along with it's size.
 
-		For vertex buffers see: https://www.opengl.org/wiki/Vertex_Specification
+		To simplfy the configuration of this information we configure both the VBO and the IBO
+		inside of an object which represents a collection of VBO configuration information called 
+		(confusingly) a Vertex Array Object (VAO). To configure vertex data we bind our VBO to the
+		GL_ARRAY_BUFFER target and then call `glVertexAttribPointer` variations to store that data
+		in the VAO (the GL_ARRAY_BUFFER binding *is not* stored in the VAO). These bind to an 
+		attribute in the shader, which can specify them using the layout directive, or the program
+		can use `glGetAttribLocation` to determine there location in the shader by name. Rebinding
+		GL_ARRAY_BUFFER does not change any attribute configuration information.
+
+		`glVertexAttribPointer` essientially describes to the shader how to access the vertex data.
+		In addition to attribute, it takes a type of the data (float in all cases here), how many
+		of that type (to form vectors in the shader), and a helper flag determining if they should
+		be normalized all determine the shape, it also takes a stride value (how many bytes to skip
+		between each element of the attribute) and an offset from which to start reading in the
+		buffer. We also enable these attributes so OpenGL knows to ship the data to the shader.
+
+		Finally we configure the IBO. In this case it's simply changing the GL_ELEMENT_ARRAY_BUFFER
+		target (which *is* stored in the VAO). The shape of the data will be determined later by our
+		draw call.
+
+		For more see: https://www.opengl.org/wiki/Vertex_Specification
 		*/
 
 		// Gen and bind BufferArray (VAO)
@@ -277,8 +316,13 @@ public:
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, _indexBufferSize, _vecBuf_indicies.data(), GL_STATIC_DRAW);
 
 		glBindVertexArray(0);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-		// Now we stuff all the textures into memory.
+		/* T:
+		Here we load the textures.
+
+		*/
+
 		size_t textures = _vecBuf_surfaces.size();
 		_glidVec_textures.resize(textures);
 		glGenTextures((GLsizei)textures, _glidVec_textures.data());
@@ -322,12 +366,12 @@ public:
 		    also clean this up to prevent stray calls from interfering with it. This connects unit
 		    and shader.
 		* `glBindTexture`: Binds our texture to the 2d target for the active unit. This connects
-		    unit and the actual texture buffer (via id).
+		    texture unit and the actual texture data buffer (via id).
 		* `glDrawElements`: This draws triangles using the index buffer bound inside our VAO. We
 		    describe the type of the primitive (triangle) the number and size of elements (unsigned
 		    int) to construct those primitives from (3 unsigned int index elements will build one
 		    triangle primitive) and where in the buffer to start (typically 0, but we combine all
-		    our meshes, hence we have to know where each starts in the shared buffer).
+		    our meshes, hence we have to know where each starts in the shared index buffer).
 
 		*/
 		glBindVertexArray(_glid_bufferArray);

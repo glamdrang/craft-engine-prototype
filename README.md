@@ -18,7 +18,7 @@ Other terse development comments also exist.
 * `vendor`: Contains external vendor libraries.
     * `_raw`: Staging area for building the vendor folder from raw development libraries (see README in folder).
 * `src`: Contains source code.
-* `OpenGL4Starter`: Visual Studio project and build directories.
+* `project`: Visual Studio project and build directories.
 
 ## Libraries
 
