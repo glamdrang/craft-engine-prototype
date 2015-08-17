@@ -2,6 +2,12 @@
 
 #include "common.h"
 
+struct AssetShaderUniforms
+{
+	GLint color_diffuse;
+	GLint texture_diffuse;
+};
+
 /*
 * Definition for a simple opengl asset prep system.
 */
@@ -20,7 +26,7 @@ public:
 
 	// Calls the opengl rendering function.
 	// Note: Assumes a shader has been properly bound.
-	virtual void gl_render() = 0;
+	virtual void gl_render(const AssetShaderUniforms& uniforms) const = 0;
 
 	// Unloads from opengl.
 	virtual void gl_unload() = 0;

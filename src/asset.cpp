@@ -74,6 +74,7 @@ private:
 	struct _Material
 	{
 		unsigned int texture_diffuse;
+		glm::vec3 color_Diffuse;
 	};
 
 	struct _Texture
@@ -138,6 +139,8 @@ public:
 		This uses the AssImp structure to import data into two buffers. A vertex buffer containing
 		per-vertex data. And an index buffer containing the indicies into that vertex buffer.
 
+		<<INCOMPLETE>>
+
 		*/
 
 		_vec_meshes.resize(scene->mNumMeshes);
@@ -186,24 +189,33 @@ public:
 		This uses the AssImp structure and SDL_Image to import texture resources into a list of
 		textures.
 
+		<<INCOMPLETE>>
+
 		*/
 
 		_vec_materials.resize(scene->mNumMaterials);
+		_vec_textures.resize(0);
+
+		_Texture nullTexture;
+		nullTexture.surface = 0;
+		_vec_textures.push_back(nullTexture); // Add null texture
 		for (unsigned int iMaterial = 0; iMaterial < scene->mNumMaterials; iMaterial++)
 		{
 			_Material mat;
 			const aiMaterial* ai_material = scene->mMaterials[iMaterial];
 
-			aiString texturePath;
+			aiString aiOut_texturePath;
+			aiColor3D aiOut_color;
+			float aiOut_blend;
 
 			const unsigned int numTextures = ai_material->GetTextureCount(aiTextureType_DIFFUSE);
 
-			if (ai_material->GetTextureCount(aiTextureType_DIFFUSE) > 0 && ai_material->GetTexture(aiTextureType_DIFFUSE, 0, &texturePath) == AI_SUCCESS)
+			if (ai_material->GetTextureCount(aiTextureType_DIFFUSE) > 0 && ai_material->GetTexture(aiTextureType_DIFFUSE, 0, &aiOut_texturePath) == AI_SUCCESS)
 			{
 				_Texture tex;
 
 				// Load file
-				std::string tex_filename = directory + texturePath.data;
+				std::string tex_filename = directory + aiOut_texturePath.data;
 				SDL_Surface *image;
 				image = IMG_Load(tex_filename.c_str());
 				if (!image) {
@@ -214,9 +226,23 @@ public:
 				tex.surface = (unsigned int)(_vecBuf_surfaces.size() - 1);
 
 				_vec_textures.push_back(tex);
+				mat.texture_diffuse = (unsigned int)(_vec_textures.size() - 1);
 			}
-			mat.texture_diffuse = (unsigned int)(_vec_textures.size() - 1);
-			_vec_materials.push_back(mat);
+			else
+			{
+				mat.texture_diffuse = 0;
+			}
+
+			if (ai_material->Get(AI_MATKEY_COLOR_DIFFUSE, aiOut_color) == AI_SUCCESS)
+			{
+				*((aiColor3D*)(&mat.color_Diffuse)) = aiOut_color;
+			}
+			if (ai_material->Get(AI_MATKEY_TEXBLEND_DIFFUSE(0), aiOut_blend) == AI_SUCCESS)
+			{
+				mat.color_Diffuse *= aiOut_blend;
+			}
+
+			_vec_materials[iMaterial] = mat;
 		}
 
 		_assimpLoaded = true;
@@ -321,15 +347,28 @@ public:
 		/* T:
 		Here we load the textures.
 
+		We use 0 as the null texture.
 		*/
 
-		size_t textures = _vecBuf_surfaces.size();
-		_glidVec_textures.resize(textures);
-		glGenTextures((GLsizei)textures, _glidVec_textures.data());
+		size_t texture_count = _vecBuf_surfaces.size() + 1;
+		_glidVec_textures.resize(texture_count);
+		glGenTextures((GLsizei)texture_count, _glidVec_textures.data());
 
-		for (int i = 0; i < textures; i++)
+		// Null Texture
+		unsigned int nullTextureData[] = {
+			0x00000000, 0x00000000,
+			0x00000000, 0x00000000
+		};
+
+		glBindTexture(GL_TEXTURE_2D, _glidVec_textures[0]);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 2, 2, 0, GL_RGBA, GL_UNSIGNED_INT_8_8_8_8, nullTextureData);
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+		for (int i = 1; i < texture_count; i++)
 		{
-			SDL_Surface* surface = _vecBuf_surfaces[i];
+			SDL_Surface* surface = _vecBuf_surfaces[i - 1];
 			GLuint texture = _glidVec_textures[i];
 
 			glBindTexture(GL_TEXTURE_2D, texture);
@@ -351,7 +390,7 @@ public:
 		_glLoaded = true;
 	}
 
-	virtual void gl_render()
+	virtual void gl_render(const AssetShaderUniforms& uniforms) const
 	{
 		/* T:
 		Here we have our render function. To reduce load on the CPU and CPU->GPU bus we try to be
@@ -367,6 +406,7 @@ public:
 		    and shader.
 		* `glBindTexture`: Binds our texture to the 2d target for the active unit. This connects
 		    texture unit and the actual texture data buffer (via id).
+		* `glUniform*`: Bind our per mesh (and it's material) shader uniforms.
 		* `glDrawElements`: This draws triangles using the index buffer bound inside our VAO. We
 		    describe the type of the primitive (triangle) the number and size of elements (unsigned
 		    int) to construct those primitives from (3 unsigned int index elements will build one
@@ -377,8 +417,18 @@ public:
 		glBindVertexArray(_glid_bufferArray);
 		for (int i = 0; i < _vec_meshes.size(); i++)
 		{
-			_Mesh& mesh = _vec_meshes[i];
-			glActiveTexture(GL_TEXTURE0 + 1); glBindTexture(GL_TEXTURE_2D, _glidVec_textures[_vec_materials[mesh.material].texture_diffuse]);
+			const _Mesh& mesh = _vec_meshes[i];
+			const _Material& mat = _vec_materials[mesh.material];
+
+			//// Textures:
+			// Diffuse, Texture Unit 1 by default
+			glActiveTexture(GL_TEXTURE0 + 1); glBindTexture(GL_TEXTURE_2D, _glidVec_textures[mat.texture_diffuse]);
+
+			//// Colors:
+			// Diffuse
+			glUniform4fv(uniforms.color_diffuse, 1, glm::value_ptr(mat.color_Diffuse));
+
+			//// Draw!
 			glDrawElements(GL_TRIANGLES, (GLsizei)mesh.length_element, GL_UNSIGNED_INT, (void*)mesh.start_index);
 		}
 		glActiveTexture(GL_TEXTURE0);

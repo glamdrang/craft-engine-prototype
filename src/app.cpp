@@ -86,9 +86,6 @@ void ExampleApp::draw()
 	    of as looking down -z at the origin (so we can apply the project transform). We use the
 	    lookAt utility function to simplyfy this.
 
-	* texDiffuse: This binds our diffuse sampler (e.g. color) to texture unit 1 (e.g.
-	    `GL_TEXTURE0 + 1`)
-
 	For information on view, model, and world space see:
 	http://www.codinglabs.net/article_world_view_projection_matrix.aspx
 	*/
@@ -100,19 +97,36 @@ void ExampleApp::draw()
 	glm::mat4 viewMat = glm::lookAt(glm::vec3(4.0, 1.0, -4.0), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0));
 	glUniformMatrix4fv(glGetUniformLocation(shader, "viewMatrix"), 1, GL_FALSE, glm::value_ptr(viewMat));
 
-	glUniform1i(glGetUniformLocation(shader, "texDiffuse"), 1);
+
+	/* T:
+
+	Here We grab other required shader uniforms and place them into a structure so our asset knows
+	what they are in the current shader. We partially rely on a standard for textures. Where the
+	diffuse texture is assumed to be at textrue unit 1 (e.g. `GL_TEXTURE0 + 1`) and if the asset 
+	changes that we assume it will change it back when done.
+
+	The shader uniform system is rather robust. It returns a -1 for any variable the shader doesn't
+	have (or on name error), and attempting to bind to uniform -1 has no effect. This is because
+	drivers aggressively optimize shaders and may remove variables they deem unneccessary.
+
+	Generally our scene-graph (currently non-exisitent) would cull models which wouldn't end up
+	being rendered.
+	*/
+	AssetShaderUniforms uniforms;
+	uniforms.texture_diffuse = glGetUniformLocation(shader, "texDiffuse");
+	glUniform1i(uniforms.texture_diffuse, 1);
+
+	uniforms.color_diffuse = glGetUniformLocation(shader, "colorDiffuse");
 
 	/* T:
 	Here we render our scene using the above shader. For now it's a single asset. The location of
 	the asset in the scene is set using the `modelMat` so the shader knows where to place it.
 
-	Generally our scene-graph (currently non-exisitent) would cull models which wouldn't end up
-	being rendered.
 	*/
-
 	glm::mat4 modelMat = glm::scale(glm::mat4(1.0), glm::vec3(0.01, 0.01, 0.01));
 	glUniformMatrix4fv(glGetUniformLocation(shader, "modelMatrix"), 1, GL_FALSE, glm::value_ptr(modelMat));
-	asset->gl_render();
+
+	asset->gl_render(uniforms);
 
 	/* T:
 	Here we reset the OpenGL states back to their defualt.

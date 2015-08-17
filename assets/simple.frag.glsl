@@ -6,7 +6,8 @@ in vec3 o_norms;
 out vec4 fragColour;
 
 uniform sampler2D texDiffuse;
+uniform vec3 colorDiffuse;
 
 void main() {
-  fragColour = texture(texDiffuse, o_texs);
+  fragColour = vec4(colorDiffuse, 1.0) + texture(texDiffuse, o_texs);
 }
