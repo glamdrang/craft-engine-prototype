@@ -35,21 +35,9 @@ private:
 	*/
 	struct _Vertex
 	{
-		union
-		{
-			struct
-			{
-				aiVector3D aipos;
-				aiVector2D aitex;
-				aiVector3D ainorm;
-			};
-			struct
-			{
-				::glm::vec3 pos;
-				::glm::vec2 tex;
-				::glm::vec3 norm;
-			};
-		};
+		glm::vec3 pos;
+		glm::vec2 tex;
+		glm::vec3 norm;
 	};
 
 	/* T:
@@ -154,11 +142,9 @@ public:
 			{
 				_Vertex v;
 
-				v.aipos = ai_mesh.mVertices[iVertex];
-				const aiVector3D* tex = ai_mesh.HasTextureCoords(0) ? &ai_mesh.mTextureCoords[0][iVertex] : &Zero3D;
-				v.aitex.x = tex->x;
-				v.aitex.y = tex->y;
-				v.ainorm = ai_mesh.HasNormals() ? ai_mesh.mNormals[iVertex] : Zero3D;
+				v.pos = glm::make_vec3((float*)(&ai_mesh.mVertices[iVertex]));
+				v.tex = glm::make_vec2((float*)(ai_mesh.HasTextureCoords(0) ? &ai_mesh.mTextureCoords[0][iVertex] : &Zero3D));
+				v.norm = glm::make_vec3((float*)(ai_mesh.HasNormals() ? &ai_mesh.mNormals[iVertex] : &Zero3D));
 
 				_vecBuf_verticies.push_back(v);
 				_vertexBufferSize += sizeof(_Vertex);

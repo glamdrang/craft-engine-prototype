@@ -113,7 +113,7 @@
       <AdditionalDependencies>opengl32.lib;glew32.lib;SDL2.lib;SDL2_image.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>ROBOCOPY "$(SolutionDir)\..\vendor\bin\win_x64_vc120" "$(OutDir)\"  /njs /ndl /nfl /np /nc /ns
+      <Command>ROBOCOPY "$(SolutionDir)\..\vendor\bin\win_x64_vc120" "$(OutDir)\" *.dll /njs /ndl /nfl /np /nc /ns
 
 set rce=%errorlevel%
 if not %rce% LSS 4 exit %rce%
@@ -152,7 +152,7 @@ exit 0</Command>
       <AdditionalLibraryDirectories>H:\Work\ogl4-starter\vendor\lib\win_x64_vc120;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>ROBOCOPY "$(SolutionDir)\..\vendor\bin\win_x64_vc120" "$(OutDir)\"  /njs /ndl /nfl /np /nc /ns
+      <Command>ROBOCOPY "$(SolutionDir)\..\vendor\bin\win_x64_vc120" "$(OutDir)\" *.dll /njs /ndl /nfl /np /nc /ns
 
 set rce=%errorlevel%
 if not %rce% LSS 4 exit %rce%
