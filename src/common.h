@@ -22,3 +22,17 @@
 #include <glm/gtc/type_ptr.hpp> // glm::value_ptr
 
 #include <assimp/types.h>
+
+/******************************************************************************
+** Simple Wrappers
+******************************************************************************/
+
+/* T:
+Holds the SDL variables for a window and it's opengl context. This can be used to manage them via
+SDL.
+*/
+struct Window
+{
+	SDL_Window* sdlwindow;
+	SDL_GLContext glcontext;
+};

@@ -1,4 +1,5 @@
 #pragma once
+#include "common.h"
 
 /*
  * Takes a vertex shader file and fragment shader file and combines them into a program.

@@ -25,14 +25,20 @@
   <ItemGroup>
     <ClCompile Include="..\src\app.cpp" />
     <ClCompile Include="..\src\asset.cpp" />
+    <ClCompile Include="..\src\camera.cpp" />
+    <ClCompile Include="..\src\console.cpp" />
     <ClCompile Include="..\src\driver.cpp" />
+    <ClCompile Include="..\src\event_input.cpp" />
     <ClCompile Include="..\src\scene.cpp" />
     <ClCompile Include="..\src\shader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\asset.h" />
+    <ClInclude Include="..\src\camera.h" />
     <ClInclude Include="..\src\common.h" />
+    <ClInclude Include="..\src\console.h" />
     <ClInclude Include="..\src\core.h" />
+    <ClInclude Include="..\src\event_input.h" />
     <ClInclude Include="..\src\scene.h" />
     <ClInclude Include="..\src\shader.h" />
   </ItemGroup>
