@@ -27,6 +27,8 @@ void quit_sdl()
 
 void init_glew()
 {
+	// We push the limit here on some drivers
+	glewExperimental = GL_TRUE;
 	GLenum ret = glewInit();
 
 	if (GLEW_OK != ret)
@@ -34,6 +36,9 @@ void init_glew()
 		std::cerr << "GLEW Error: " << glewGetErrorString(ret) << std::endl;
 		exit(1);
 	}
+
+	std::cerr << "GLEW Status: GL 4.4: " << (bool)GL_VERSION_4_4 << std::endl;
+	std::cerr << "GLEW Status: GLEW " << glewGetString(GLEW_VERSION) << std::endl;
 }
 
 /******************************************************************************

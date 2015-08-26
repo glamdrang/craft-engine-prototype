@@ -18,9 +18,8 @@ public:
 class StandardCamera : public ICamera, public IInputHandler
 {
 	float _updown, _leftright, _tilt;
-	float _v_updown, _v_leftright, _v_tilt;
-	
-	glm::vec3 _velocity;
+
+	bool _move_left, _move_right, _move_fwd, _move_back, _move_tilt_left, _move_tilt_right;
 
 	bool _locked;
 

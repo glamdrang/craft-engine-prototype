@@ -1,5 +1,7 @@
 #include "camera.h"
 
+float const c_move(0.05f), c_turn(0.002f);
+
 StandardCamera::StandardCamera()
 {
 	this->position = glm::vec3(0.0, 1.0, 10.0);
@@ -11,13 +13,22 @@ StandardCamera::StandardCamera()
 
 void StandardCamera::update()
 {
-	position.x += _velocity.x * glm::cos(_leftright) + _velocity.z * glm::sin(_leftright);
-	position.y += _velocity.y;
-	position.z += _velocity.z * glm::cos(_leftright) - _velocity.x * glm::sin(_leftright);
+	glm::vec3 velocity;
+	float v_tilt = 0.0;
 
-	_updown += _v_updown;
-	_leftright += _v_leftright;
-	_tilt += _v_tilt;
+	if (_move_left) velocity.x += -c_move;
+	if (_move_right) velocity.x += c_move;
+	if (_move_fwd) velocity.z += -c_move;
+	if (_move_back) velocity.z += c_move;
+	if (_move_tilt_left) v_tilt += c_move;
+	if (_move_tilt_right) v_tilt += -c_move;
+
+
+	position.x += velocity.x * glm::cos(_leftright) + velocity.z * glm::sin(_leftright);
+	position.y += velocity.y;
+	position.z += velocity.z * glm::cos(_leftright) - velocity.x * glm::sin(_leftright);
+
+	_tilt += v_tilt;
 
 	this->buildViewMatrix();
 }
@@ -25,7 +36,6 @@ void StandardCamera::update()
 void StandardCamera::buildViewMatrix()
 {
 	glm::vec3 const c_up = glm::vec3(0.0, 1.0, 0.0);
-	glm::vec3 look_in = glm::vec3(0.0, 0.0, 0.0);
 
 	float rest = glm::cos(_updown);
 
@@ -38,7 +48,6 @@ void StandardCamera::buildViewMatrix()
 
 void StandardCamera::handel(SDL_Event const& sdlevent)
 {
-	float const c_move(0.05f), c_turn(0.002f);
 
 	switch (sdlevent.type)
 	{
@@ -51,20 +60,20 @@ void StandardCamera::handel(SDL_Event const& sdlevent)
 			break;
 		case SDLK_LEFT:
 		case SDLK_a:
-			_velocity.x = -c_move; break;
+			_move_left = true; break;
 		case SDLK_RIGHT:
 		case SDLK_d:
-			_velocity.x = c_move; break;
+			_move_right = true; break;
 		case SDLK_UP:
 		case SDLK_w:
-			_velocity.z = -c_move; break;
+			_move_fwd = true; break;
 		case SDLK_DOWN:
 		case SDLK_s:
-			_velocity.z =  c_move; break;
+			_move_back = true; break;
 		case SDLK_q:
-			_v_tilt =  c_move; break;
+			_move_tilt_left = true; break;
 		case SDLK_e:
-			_v_tilt = -c_move; break;
+			_move_tilt_right = true; break;
 		default:
 			break;
 		}
@@ -74,20 +83,20 @@ void StandardCamera::handel(SDL_Event const& sdlevent)
 		{
 		case SDLK_LEFT:
 		case SDLK_a:
-			_velocity.x = 0.0; break;
+			_move_left = false; break;
 		case SDLK_RIGHT:
 		case SDLK_d:
-			_velocity.x = 0.0; break;
+			_move_right = false; break;
 		case SDLK_UP:
 		case SDLK_w:
-			_velocity.z = 0.0; break;
+			_move_fwd = false; break;
 		case SDLK_DOWN:
 		case SDLK_s:
-			_velocity.z = 0.0; break;
+			_move_back = false; break;
 		case SDLK_q:
-			_v_tilt = 0.0; break;
+			_move_tilt_left = false; break;
 		case SDLK_e:
-			_v_tilt = 0.0; break;
+			_move_tilt_right = false; break;
 		default:
 			break;
 		}
