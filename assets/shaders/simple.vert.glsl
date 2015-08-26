@@ -12,8 +12,8 @@ out vec2 o_texs;
 out vec3 o_norms;
 
 void main() {
-  gl_Position = projMatrix * viewMatrix * modelMatrix * vec4(pos, 1.0);
+	gl_Position = projMatrix * viewMatrix * modelMatrix * vec4(pos, 1.0);
 
-  o_texs = tex;
-  o_norms = norm;
+	o_texs = tex;
+	o_norms = norm;
 }

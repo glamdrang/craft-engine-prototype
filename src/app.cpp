@@ -43,7 +43,7 @@ void ExampleApp::init(Window* win)
 	LoadShader can be found in shader.h/cpp; it returns an opengl ShaderProgram
 	AssetFromFile (and the IAsset interface) can be found in asset.h/cpp
 	*/
-	_shader = LoadShader("..\\assets\\simple.vert.glsl", "..\\assets\\simple.frag.glsl");
+	_shader = LoadShader("..\\assets\\shaders\\simple.vert.glsl", "..\\assets\\shaders\\simple.frag.glsl");
 
 	_asset = AssetFromFile("..\\assets\\Banana.obj");
 

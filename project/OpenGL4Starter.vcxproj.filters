@@ -1,8 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <None Include="..\assets\simple.frag.glsl" />
-    <None Include="..\assets\simple.vert.glsl" />
+    <None Include="..\assets\simple.frag.glsl">
+      <Filter>assets/shaders</Filter>
+    </None>
+    <None Include="..\assets\simple.vert.glsl">
+      <Filter>assets/shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\app.cpp" />
@@ -23,5 +27,10 @@
     <ClInclude Include="..\src\event_input.h" />
     <ClInclude Include="..\src\camera.h" />
     <ClInclude Include="..\src\console.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="assets/shaders">
+      <UniqueIdentifier>{d5b9501a-853e-4d10-89e9-968d58a858bd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
