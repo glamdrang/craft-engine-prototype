@@ -9,7 +9,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\app.cpp" />
     <ClCompile Include="..\src\driver.cpp" />
     <ClCompile Include="..\src\asset.cpp" />
     <ClCompile Include="..\src\scene.cpp" />
@@ -17,6 +16,7 @@
     <ClCompile Include="..\src\event_input.cpp" />
     <ClCompile Include="..\src\camera.cpp" />
     <ClCompile Include="..\src\console.cpp" />
+    <ClCompile Include="..\src\app_simple.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\common.h" />

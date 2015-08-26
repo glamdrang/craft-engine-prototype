@@ -13,11 +13,14 @@ class ExampleApp : public IApp
 	std::vector<IInputHandler*> _input_handlers;
 
 public:
+	virtual void window_spec(Uint32& sdl_flags, int& width, int& height, int& x, int& y);
+
 	virtual void init(Window* win);
 	virtual void draw();
 	virtual void event(SDL_Event& event);
 };
 
+#if defined(APP_SIMPLE)
 IApp* new_App()
 {
 	return new ExampleApp();
@@ -26,6 +29,16 @@ IApp* new_App()
 void del_App(IApp* app)
 {
 	delete (ExampleApp*)app;
+}
+#endif
+
+void ExampleApp::window_spec(Uint32& sdl_flags, int& width, int& height, int& x, int& y)
+{
+	sdl_flags = SDL_WINDOW_RESIZABLE;
+	width = 1024;
+	height = 768;
+	x = -1;
+	y = -1;
 }
 
 void ExampleApp::init(Window* win)

@@ -45,16 +45,20 @@ void init_glew()
 ** Misc Helpers
 ******************************************************************************/
 
-Window* new_sdlWindow()
+Window* new_sdlWindow(IApp* app)
 {
 	Window* window = new Window();
+
+	Uint32 sdl_flags;
+	int width, height, x, y;
+	app->window_spec(sdl_flags, width, height, x, y);
 
 	// Window mode MUST include SDL_WINDOW_OPENGL for use with OpenGL.
 	window->sdlwindow = SDL_CreateWindow(
 		"SDL2/OpenGL Demo",
-		SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-		1024, 800,
-		SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
+		(x != -1) ? x : SDL_WINDOWPOS_CENTERED, (y != -1) ? y : SDL_WINDOWPOS_CENTERED,
+		width, height,
+		SDL_WINDOW_OPENGL | sdl_flags);
 
 	if (window->sdlwindow == 0)
 	{
@@ -141,16 +145,30 @@ int CALLBACK WinMain(
 	_In_ HINSTANCE hPrevInstance,
 	_In_ LPSTR     lpCmdLine,
 	_In_ int       nCmdShow)
+{
+	LPWSTR *szArgList;
+	int argc;
+
+	szArglist = CommandLineToArgvW(GetCommandLineW(), &nArgs);
+
+	char** argv = new char*[argc + 1];
+	argv[argc] = 0;
+	for (int i = 0; i < argc; i++)
+	{
+		int length = WideCharToMultiByte(cp, 0, sampleObject->a, -1, 0, 0, NULL, NULL);
+		argv[i] = new char[length];
+		WideCharToMultiByte(cp, 0, sampleObject->a, -1, argv[i], length, NULL, NULL);
+	}
 #else
 int main(int argc, char** argv)
-#endif
 {
+#endif
 	Window* win;
 	IApp* app = new_App();
 
 	// Init libraries
 	init_sdl();
-	win = new_sdlWindow(); // Also inits the GLContext
+	win = new_sdlWindow(app); // Also inits the GLContext
 
 	init_glew(); // Requires GL context to inited by window.
 

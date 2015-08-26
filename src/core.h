@@ -28,6 +28,8 @@ Describes the interface used by the driver.
 class IApp
 {
 public:
+	virtual void window_spec(Uint32& sdl_flags, int& width, int& height, int& x, int& y) = 0;
+
 	virtual void init(Window* window) = 0;
 	virtual void draw() = 0;
 	virtual void event(SDL_Event& event) = 0;
