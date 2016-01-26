@@ -1,5 +1,4 @@
-#include "event_input.h"
-
+#include "handlers.h"
 
 /******************************************************************************
 ** WindowResizeHandler
@@ -7,7 +6,7 @@
 
 void WindowResizeHandler::handel(SDL_Event const& sdlevent)
 {
-	if (sdlevent.type == SDL_WINDOWEVENT 
+	if (sdlevent.type == SDL_WINDOWEVENT
 		&& sdlevent.window.event == SDL_WINDOWEVENT_RESIZED
 		&& sdlevent.window.windowID == SDL_GetWindowID(_window->sdlwindow))
 	{

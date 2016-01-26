@@ -13,26 +13,31 @@
   <ItemGroup>
     <None Include="..\assets\simple.frag.glsl" />
     <None Include="..\assets\simple.vert.glsl" />
+    <None Include="..\src\README.md" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\app_simple.cpp" />
-    <ClCompile Include="..\src\asset.cpp" />
-    <ClCompile Include="..\src\camera.cpp" />
-    <ClCompile Include="..\src\console.cpp" />
-    <ClCompile Include="..\src\driver.cpp" />
-    <ClCompile Include="..\src\event_input.cpp" />
-    <ClCompile Include="..\src\scene.cpp" />
-    <ClCompile Include="..\src\shader.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\src\asset.h" />
-    <ClInclude Include="..\src\camera.h" />
     <ClInclude Include="..\src\common.h" />
-    <ClInclude Include="..\src\console.h" />
+    <ClInclude Include="..\src\config.h" />
     <ClInclude Include="..\src\core.h" />
-    <ClInclude Include="..\src\event_input.h" />
-    <ClInclude Include="..\src\scene.h" />
-    <ClInclude Include="..\src\shader.h" />
+    <ClInclude Include="..\src\features\handlers.h" />
+    <ClInclude Include="..\src\features\StandardCamera.h" />
+    <ClInclude Include="..\src\gfx\asset.h" />
+    <ClInclude Include="..\src\gfx\camera.h" />
+    <ClInclude Include="..\src\gfx\scene.h" />
+    <ClInclude Include="..\src\gfx\shader.h" />
+    <ClInclude Include="..\src\input\console.h" />
+    <ClInclude Include="..\src\input\IInputHandler.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\apps\app_simple.cpp" />
+    <ClCompile Include="..\src\driver.cpp" />
+    <ClCompile Include="..\src\features\handlers.cpp" />
+    <ClCompile Include="..\src\features\StandardCamera.cpp" />
+    <ClCompile Include="..\src\gfx\asset.cpp" />
+    <ClCompile Include="..\src\gfx\camera.cpp" />
+    <ClCompile Include="..\src\gfx\scene.cpp" />
+    <ClCompile Include="..\src\gfx\shader.cpp" />
+    <ClCompile Include="..\src\input\console.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{55E833AF-9459-472B-8D2B-49992817F74D}</ProjectGuid>
@@ -71,7 +76,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)\..\vendor\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
-      <PreprocessorDefinitions>APP_SIMPLE;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -97,7 +102,7 @@ exit 0</Command>
       <AdditionalIncludeDirectories>$(SolutionDir)\..\vendor\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
-      <PreprocessorDefinitions>APP_SIMPLE;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

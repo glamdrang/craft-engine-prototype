@@ -1,4 +1,4 @@
-#include "camera.h"
+#include "StandardCamera.h"
 
 float const c_move(0.05f), c_turn(0.002f);
 
@@ -18,6 +18,8 @@ void StandardCamera::update()
 
 	if (_move_left) velocity.x += -c_move;
 	if (_move_right) velocity.x += c_move;
+	if (_move_up) velocity.y += c_move;
+	if (_move_down) velocity.y += -c_move;
 	if (_move_fwd) velocity.z += -c_move;
 	if (_move_back) velocity.z += c_move;
 	if (_move_tilt_left) v_tilt += c_move;
@@ -70,6 +72,10 @@ void StandardCamera::handel(SDL_Event const& sdlevent)
 		case SDLK_DOWN:
 		case SDLK_s:
 			_move_back = true; break;
+		case SDLK_r:
+			_move_up = true; break;
+		case SDLK_f:
+			_move_down = true; break;
 		case SDLK_q:
 			_move_tilt_left = true; break;
 		case SDLK_e:
@@ -93,6 +99,10 @@ void StandardCamera::handel(SDL_Event const& sdlevent)
 		case SDLK_DOWN:
 		case SDLK_s:
 			_move_back = false; break;
+		case SDLK_r:
+			_move_up = false; break;
+		case SDLK_f:
+			_move_down = false; break;
 		case SDLK_q:
 			_move_tilt_left = false; break;
 		case SDLK_e:

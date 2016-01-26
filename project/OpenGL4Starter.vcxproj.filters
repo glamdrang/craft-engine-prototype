@@ -7,30 +7,92 @@
     <None Include="..\assets\simple.vert.glsl">
       <Filter>assets/shaders</Filter>
     </None>
+    <None Include="..\src\README.md">
+      <Filter>src</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="assets/shaders">
       <UniqueIdentifier>{d5b9501a-853e-4d10-89e9-968d58a858bd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{01932e39-84e3-423b-89e6-606880f45411}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\gfx">
+      <UniqueIdentifier>{d74ee065-5770-4936-acbe-cf93d9fa486f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\input">
+      <UniqueIdentifier>{3dd53070-a710-434c-b6e8-616c50dff4b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\apps">
+      <UniqueIdentifier>{b7b7d570-1dc4-44bb-ab3d-54d216961489}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\features">
+      <UniqueIdentifier>{e01119fd-c7a3-4894-b01f-94307c5af0cd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\app_simple.cpp" />
-    <ClCompile Include="..\src\asset.cpp" />
-    <ClCompile Include="..\src\camera.cpp" />
-    <ClCompile Include="..\src\console.cpp" />
-    <ClCompile Include="..\src\driver.cpp" />
-    <ClCompile Include="..\src\event_input.cpp" />
-    <ClCompile Include="..\src\scene.cpp" />
-    <ClCompile Include="..\src\shader.cpp" />
+    <ClInclude Include="..\src\common.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\gfx\asset.h">
+      <Filter>src\gfx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\gfx\camera.h">
+      <Filter>src\gfx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\gfx\scene.h">
+      <Filter>src\gfx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\gfx\shader.h">
+      <Filter>src\gfx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\input\console.h">
+      <Filter>src\input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\config.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\features\StandardCamera.h">
+      <Filter>src\features</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\input\IInputHandler.h">
+      <Filter>src\input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\features\handlers.h">
+      <Filter>src\features</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\asset.h" />
-    <ClInclude Include="..\src\camera.h" />
-    <ClInclude Include="..\src\common.h" />
-    <ClInclude Include="..\src\console.h" />
-    <ClInclude Include="..\src\core.h" />
-    <ClInclude Include="..\src\event_input.h" />
-    <ClInclude Include="..\src\scene.h" />
-    <ClInclude Include="..\src\shader.h" />
+    <ClCompile Include="..\src\driver.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gfx\asset.cpp">
+      <Filter>src\gfx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gfx\camera.cpp">
+      <Filter>src\gfx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gfx\scene.cpp">
+      <Filter>src\gfx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gfx\shader.cpp">
+      <Filter>src\gfx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\input\console.cpp">
+      <Filter>src\input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\apps\app_simple.cpp">
+      <Filter>src\apps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\features\StandardCamera.cpp">
+      <Filter>src\features</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\features\handlers.cpp">
+      <Filter>src\features</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

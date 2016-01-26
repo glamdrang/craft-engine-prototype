@@ -2,15 +2,15 @@
 
 #include "common.h"
 
-#include "event_input.h"
+#include "input/IInputHandler.h"
 
-#include "camera.h"
-#include "shader.h"
-#include "asset.h"
+#include "gfx/camera.h"
+#include "gfx/shader.h"
+#include "gfx/asset.h"
 
 /* T:
-Describes the contents of both driver.cpp (containing main) and app.cpp (containing primary 
-user code).
+Describes the contents of both driver.cpp (containing main) and various app_*.cpp files (containing
+primary user code).
 
 This file describes the global application structures, as well as how the driver interacts with
 the user's application code.
@@ -28,7 +28,7 @@ Describes the interface used by the driver.
 class IApp
 {
 public:
-	virtual void window_spec(Uint32& sdl_flags, int& width, int& height, int& x, int& y) = 0;
+	virtual void window_spec(Uint32& sdl_flags, int& width, int& height, int& x, int& y, std::string& name) = 0;
 
 	virtual void init(Window* window) = 0;
 	virtual void draw() = 0;

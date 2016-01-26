@@ -1,4 +1,6 @@
-#include "core.h"
+#include "../core.h"
+#include "../features/handlers.h"
+#include "../features/StandardCamera.h"
 
 class ExampleApp : public IApp
 {
@@ -13,7 +15,7 @@ class ExampleApp : public IApp
 	std::vector<IInputHandler*> _input_handlers;
 
 public:
-	virtual void window_spec(Uint32& sdl_flags, int& width, int& height, int& x, int& y);
+	virtual void window_spec(Uint32& sdl_flags, int& width, int& height, int& x, int& y, std::string& name);
 
 	virtual void init(Window* win);
 	virtual void draw();
@@ -32,8 +34,9 @@ void del_App(IApp* app)
 }
 #endif
 
-void ExampleApp::window_spec(Uint32& sdl_flags, int& width, int& height, int& x, int& y)
+void ExampleApp::window_spec(Uint32& sdl_flags, int& width, int& height, int& x, int& y, std::string& name)
 {
+	name = "Simple App";
 	sdl_flags = SDL_WINDOW_RESIZABLE;
 	width = 1024;
 	height = 768;
@@ -141,7 +144,7 @@ void ExampleApp::draw()
 
 	/* T:
 	Here we render our scene using the above shader. For now it's a single asset. The location of
-	the asset in the scene is set using the `modelMat` so the shader knows where to place it.
+	the asset in the scene is set using the `modelMatrix` so the shader knows where to place it.
 
 	*/
 	glm::mat4 modelMat = glm::scale(glm::mat4(1.0), glm::vec3(0.01, 0.01, 0.01));
