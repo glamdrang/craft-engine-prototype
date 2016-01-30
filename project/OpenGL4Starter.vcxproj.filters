@@ -10,6 +10,9 @@
     <None Include="..\src\README.md">
       <Filter>src</Filter>
     </None>
+    <None Include="..\src\gfx\README.md">
+      <Filter>src\gfx</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="assets/shaders">
@@ -29,6 +32,15 @@
     </Filter>
     <Filter Include="src\features">
       <UniqueIdentifier>{e01119fd-c7a3-4894-b01f-94307c5af0cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\features\rooms">
+      <UniqueIdentifier>{0256118d-61be-4eeb-ab1d-932a7144bbd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\gfx\opengl4">
+      <UniqueIdentifier>{c6b0e025-a428-41a1-87f7-de5dca358a7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\gfx\opengl3">
+      <UniqueIdentifier>{1c20fc7d-2e6b-4f96-a754-9962bc59d90d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -65,6 +77,27 @@
     <ClInclude Include="..\src\features\handlers.h">
       <Filter>src\features</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\features\rooms\rooms.h">
+      <Filter>src\features\rooms</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\gfx\Mesh.hpp">
+      <Filter>src\gfx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\gfx\gl.h">
+      <Filter>src\gfx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\gfx\Vertex.hpp">
+      <Filter>src\gfx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\gfx\Shader.hpp">
+      <Filter>src\gfx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\gfx\Texture.hpp">
+      <Filter>src\gfx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\gfx\Triangle.hpp">
+      <Filter>src\gfx</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\driver.cpp">
@@ -93,6 +126,12 @@
     </ClCompile>
     <ClCompile Include="..\src\features\handlers.cpp">
       <Filter>src\features</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\features\rooms\rooms.cpp">
+      <Filter>src\features\rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gfx\opengl4\gl.cpp">
+      <Filter>src\gfx\opengl4</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

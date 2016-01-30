@@ -31,6 +31,9 @@
 // Assest Importer
 #include <assimp/types.h>
 
+// Spdlog and Fmt format
+#include <spdlog\spdlog.h>
+
 /******************************************************************************
 ** Simple Wrappers
 ******************************************************************************/
