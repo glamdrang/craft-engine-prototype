@@ -1,4 +1,16 @@
-Description of source folder contents. Each folder has it's own README.md, in general files will be listed int he order of interest.
+Description of source folder contents. Each folder has it's own README.md, in general files will be listed in the order of interest.
+
+Naming convention:
+
+* `CamelCase.*` - Describes a class (and it's functions), along with support structures and functions (although rare).
+  * `ICamelCase.*` - Describes an "interface" class. Often abstract (or mostly abstract).
+* `under_score.*` - Describes a "system" of classes and functions (although mostly stand alone functions with some helper structures).
+
+File types:
+
+* `.h` - Header file (where declarations live).
+* `.cpp` - C++ compilation unit (where definitions live).
+* `.hpp` - A header file containing inline code (often a templated class).
 
 ## Design
 

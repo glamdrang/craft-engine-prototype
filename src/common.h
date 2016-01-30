@@ -54,3 +54,78 @@ public:
 	// Handels an input event
 	virtual void handel(SDL_Event const& sdlevent) = 0;
 };
+
+/******************************************************************************
+** Complex Template Utilities
+******************************************************************************/
+
+/* T:
+See these tutorials:
+	* http://eli.thegreenplace.net/2014/variadic-templates-in-c/
+*/
+
+/* T: template class _T_elem_type
+This is some template magic for accessing arbitrary type arguments from a template using a number.
+*/
+
+template <
+	size_t k,
+class M>
+class _T_elem_index;
+
+
+template <
+	template <typename, typename...> class M,
+	typename T,
+	typename... Ts>
+class _T_elem_index<0, M<T, Ts...>> {
+	typedef T type;
+};
+
+
+template <
+	size_t k,
+	template <typename, typename...> class M,
+	typename T,
+	typename... Ts>
+class _T_elem_index<k, M<T, Ts...>> {
+	typedef typename _T_elem_index<k - 1, M<Ts...>>::type type;
+};
+
+/* T:
+This is some template magic detail class for allowing specialization.
+*/
+template < class M >
+class T_detail
+{
+
+};
+
+// elem supporting types, base case
+template <
+	template <typename...> class M>
+class T_detail < M<> >
+{
+public:
+	typedef class M<> type;
+
+	const static bool has_nexttype = false;
+
+	const static size_t elem_count = 0;
+};
+
+// elem supporting types, general case
+template <
+	template <typename, typename...> class M,
+	typename T,
+	typename... Ts>
+class T_detail<M<T, Ts...>>
+{
+public:
+	typedef class M<T, Ts...> type;
+
+	const static bool has_nexttype = true;
+	typedef class M<Ts...> next_type;
+
+	const static size_t elem_count = 1 + next_type::elem_count;
+};
