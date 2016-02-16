@@ -73,26 +73,26 @@ This is some template magic for accessing arbitrary type arguments from a templa
 
 template <
 	size_t k,
-class M>
+	typename... Ts>
 class _T_elem_index;
 
 
 template <
-	template <typename, typename...> class M,
 	typename T,
 	typename... Ts>
-class _T_elem_index<0, M<T, Ts...>> {
+class _T_elem_index<0, T, Ts...> {
+public:
 	typedef T type;
 };
 
 
 template <
 	size_t k,
-	template <typename, typename...> class M,
 	typename T,
 	typename... Ts>
-class _T_elem_index<k, M<T, Ts...>> {
-	typedef typename _T_elem_index<k - 1, M<Ts...>>::type type;
+class _T_elem_index<k, T, Ts...> {
+public:
+	typedef typename _T_elem_index<k - 1, Ts...>::type type;
 };
 
 /* T:

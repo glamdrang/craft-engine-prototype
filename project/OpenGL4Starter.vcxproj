@@ -32,7 +32,7 @@
     <ClInclude Include="..\src\gfx\Shader.hpp" />
     <ClInclude Include="..\src\gfx\Texture.hpp" />
     <ClInclude Include="..\src\gfx\Triangle.hpp" />
-    <ClInclude Include="..\src\gfx\Vertex.hpp" />
+    <ClInclude Include="..\src\gfx\Vertex.h" />
     <ClInclude Include="..\src\input\console.h" />
     <ClInclude Include="..\src\input\IInputHandler.h" />
   </ItemGroup>
@@ -47,6 +47,7 @@
     <ClCompile Include="..\src\gfx\opengl4\gl.cpp" />
     <ClCompile Include="..\src\gfx\scene.cpp" />
     <ClCompile Include="..\src\gfx\shader.cpp" />
+    <ClCompile Include="..\src\gfx\Vertex.cpp" />
     <ClCompile Include="..\src\input\console.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

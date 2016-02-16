@@ -4,6 +4,8 @@
 #include <assimp/scene.h>           // Output data structure
 #include <assimp/postprocess.h>     // Post processing fla
 
+#include "Vertex.h"
+
 class AssImpAsset : public IAsset
 {
 private:
@@ -31,13 +33,18 @@ private:
 	std::vector<GLuint> _glidVec_textures;
 
 	/* T:
-	This describes our on graphics card data structure in both AssImp and glm data types.
+	This describes our on graphics data structure data types.
 	*/
-	struct _Vertex
+	class _Vertex : public Vertex <
+		glm::vec3, // Position
+		glm::vec2, // Texture coord
+		glm::vec3  // Normal
+	>
 	{
-		glm::vec3 pos;
-		glm::vec2 tex;
-		glm::vec3 norm;
+	public:
+		glm::vec3& pos() { return get<0>(); }
+		glm::vec2& tex() { return get<1>(); }
+		glm::vec3& norm() { return get<2>(); }
 	};
 
 	/* T:
@@ -142,9 +149,9 @@ public:
 			{
 				_Vertex v;
 
-				v.pos = glm::make_vec3((float*)(&ai_mesh.mVertices[iVertex]));
-				v.tex = glm::make_vec2((float*)(ai_mesh.HasTextureCoords(0) ? &ai_mesh.mTextureCoords[0][iVertex] : &Zero3D));
-				v.norm = glm::make_vec3((float*)(ai_mesh.HasNormals() ? &ai_mesh.mNormals[iVertex] : &Zero3D));
+				v.pos() = glm::make_vec3((float*)(&ai_mesh.mVertices[iVertex]));
+				v.tex() = glm::make_vec2((float*)(ai_mesh.HasTextureCoords(0) ? &ai_mesh.mTextureCoords[0][iVertex] : &Zero3D));
+				v.norm() = glm::make_vec3((float*)(ai_mesh.HasNormals() ? &ai_mesh.mNormals[iVertex] : &Zero3D));
 
 				_vecBuf_verticies.push_back(v);
 				_vertexBufferSize += sizeof(_Vertex);

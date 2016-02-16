@@ -86,9 +86,6 @@
     <ClInclude Include="..\src\gfx\gl.h">
       <Filter>src\gfx</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\gfx\Vertex.hpp">
-      <Filter>src\gfx</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\gfx\Shader.hpp">
       <Filter>src\gfx</Filter>
     </ClInclude>
@@ -96,6 +93,9 @@
       <Filter>src\gfx</Filter>
     </ClInclude>
     <ClInclude Include="..\src\gfx\Triangle.hpp">
+      <Filter>src\gfx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\gfx\Vertex.h">
       <Filter>src\gfx</Filter>
     </ClInclude>
   </ItemGroup>
@@ -132,6 +132,9 @@
     </ClCompile>
     <ClCompile Include="..\src\gfx\opengl4\gl.cpp">
       <Filter>src\gfx\opengl4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\gfx\Vertex.cpp">
+      <Filter>src\gfx</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
