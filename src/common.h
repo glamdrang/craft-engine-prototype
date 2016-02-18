@@ -85,7 +85,6 @@ public:
 	typedef T type;
 };
 
-
 template <
 	size_t k,
 	typename T,
@@ -93,6 +92,28 @@ template <
 class _T_elem_index<k, T, Ts...> {
 public:
 	typedef typename _T_elem_index<k - 1, Ts...>::type type;
+};
+
+/* T: template class _T_elem_count
+This is some template magic for counting elements
+*/
+
+template <
+	typename... Ts>
+class _T_elem_count;
+
+template <>
+class _T_elem_count<> {
+public:
+	const static size_t count = 0;
+};
+
+template <
+	typename T,
+	typename... Ts>
+class _T_elem_count<T, Ts...> {
+public:
+	const static size_t count = _T_elem_count<Ts...>::count + 1;
 };
 
 /* T:

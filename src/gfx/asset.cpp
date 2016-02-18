@@ -36,9 +36,9 @@ private:
 	This describes our on graphics data structure data types.
 	*/
 	class _Vertex : public Vertex <
-		glm::vec3, // Position
+		glm::vec3, // Normal
 		glm::vec2, // Texture coord
-		glm::vec3  // Normal
+		glm::vec3  // Position
 	>
 	{
 	public:
