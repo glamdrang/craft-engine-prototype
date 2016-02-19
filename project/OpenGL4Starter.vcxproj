@@ -11,8 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\assets\simple.frag.glsl" />
-    <None Include="..\assets\simple.vert.glsl" />
+    <None Include="..\assets\shaders\simple.frag.glsl" />
+    <None Include="..\assets\shaders\simple.vert.glsl" />
     <None Include="..\src\gfx\README.md" />
     <None Include="..\src\README.md" />
   </ItemGroup>
@@ -30,7 +30,7 @@
     <ClInclude Include="..\src\gfx\scene.h" />
     <ClInclude Include="..\src\gfx\shader.h" />
     <ClInclude Include="..\src\gfx\Shader.hpp" />
-    <ClInclude Include="..\src\gfx\Texture.hpp" />
+    <ClInclude Include="..\src\gfx\Texture.h" />
     <ClInclude Include="..\src\gfx\Triangle.hpp" />
     <ClInclude Include="..\src\gfx\Vertex.h" />
     <ClInclude Include="..\src\input\console.h" />
@@ -92,7 +92,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)\..\vendor\lib\win_x64_vc120;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;SDL2.lib;SDL2_image.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glew32.lib;SDL2.lib;SDL2_image.lib;assimp.lib;libyaml-cppmdd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>ROBOCOPY "$(SolutionDir)\..\vendor\bin\win_x64_vc120" "$(OutDir)\" *.dll /njs /ndl /nfl /np /nc /ns
@@ -119,7 +119,7 @@ exit 0</Command>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;SDL2.lib;SDL2_image.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glew32.lib;SDL2.lib;SDL2_image.lib;assimp.lib;libyaml-cppmd.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)\..\vendor\lib\win_x64_vc120;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>

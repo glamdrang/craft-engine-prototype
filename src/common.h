@@ -31,6 +31,9 @@
 // Assest Importer
 #include <assimp/types.h>
 
+// YAML
+#include <yaml-cpp\yaml.h>
+
 // Spdlog and Fmt format
 #include <spdlog\spdlog.h>
 
