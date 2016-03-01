@@ -27,3 +27,5 @@ Other terse development comments also exist.
 * **AssImp**: Used in place of custom file formats and custom parsers for standard ones. Be aware, however, that this library is much slower at loading files due to it's very general nature.
 * **GLM**: Vector math library which mimics GLSL functions.
 * **GLEW**: Simplifies OpenGL usage in C++.
+* **Spdlog**: For logging.
+* **Yaml-cpp**: For configuration files.

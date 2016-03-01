@@ -13,6 +13,12 @@
     <None Include="..\assets\shaders\simple.frag.glsl">
       <Filter>assets/shaders</Filter>
     </None>
+    <None Include="..\assets\shaders\console.vert.glsl">
+      <Filter>assets/shaders</Filter>
+    </None>
+    <None Include="..\assets\shaders\console.frag.glsl">
+      <Filter>assets/shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="assets/shaders">
@@ -41,6 +47,9 @@
     </Filter>
     <Filter Include="src\gfx\opengl3">
       <UniqueIdentifier>{1c20fc7d-2e6b-4f96-a754-9962bc59d90d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\util">
+      <UniqueIdentifier>{5455bc0f-01ab-43f5-badf-a10ed4f65add}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -95,6 +104,24 @@
     <ClInclude Include="..\src\gfx\Vertex.h">
       <Filter>src\gfx</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\features\flat_world.h">
+      <Filter>src\features</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\gfx\Texture.h">
+      <Filter>src\gfx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\types.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\input\InputMapping.h">
+      <Filter>src\input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\input\InputText.h">
+      <Filter>src\input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\util\signal.hpp">
+      <Filter>src\util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\driver.cpp">
@@ -133,8 +160,23 @@
     <ClCompile Include="..\src\gfx\Vertex.cpp">
       <Filter>src\gfx</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\features\flat_world.cpp">
+      <Filter>src\features</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\apps\app_world.cpp">
+      <Filter>src\apps</Filter>
+    </ClCompile>
     <ClCompile Include="..\src\gfx\Texture.cpp">
       <Filter>src\gfx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\types.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\input\InputMapping.cpp">
+      <Filter>src\input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\input\InputText.cpp">
+      <Filter>src\input</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

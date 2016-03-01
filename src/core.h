@@ -3,6 +3,7 @@
 #include "common.h"
 
 #include "input/IInputHandler.h"
+#include "input/console.h"
 
 #include "gfx/camera.h"
 #include "gfx/shader.h"
@@ -33,6 +34,8 @@ public:
 	virtual void init(Window* window) = 0;
 	virtual void draw() = 0;
 	virtual void event(SDL_Event& event) = 0;
+
+	ICompositeType* type_root;
 };
 
 // Defined in `app.cpp`

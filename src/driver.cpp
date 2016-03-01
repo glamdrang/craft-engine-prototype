@@ -17,6 +17,11 @@ void init_sdl()
 		std::cerr << "Unable to initialize SDL IMG!";
 		exit(1);
 	}
+	if (TTF_Init() != 0)
+	{
+		std::cerr << "Unable to initialize SDL TTF!";
+		exit(1);
+	}
 }
 
 void quit_sdl()

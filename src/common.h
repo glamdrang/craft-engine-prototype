@@ -9,11 +9,13 @@
 #include <iostream>
 #include <vector>
 #include <map>
+#include <algorithm>
 
 // SDL
 #define SDL_MAIN_HANDLED
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 
 // GL
 #include <GL/glew.h> // Must be before general GL include
@@ -36,6 +38,10 @@
 
 // Spdlog and Fmt format
 #include <spdlog\spdlog.h>
+
+// Our includes
+#include "types.h"
+#include "util/signal.hpp"
 
 /******************************************************************************
 ** Simple Wrappers
@@ -60,6 +66,10 @@ public:
 	// Handels an input event
 	virtual void handel(SDL_Event const& sdlevent) = 0;
 };
+
+/* T:
+SDL event handler wrapped in an interface (rather than a callback).
+*/
 
 /******************************************************************************
 ** Complex Template Utilities

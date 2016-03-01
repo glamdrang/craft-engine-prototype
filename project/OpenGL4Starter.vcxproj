@@ -11,6 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\assets\shaders\console.frag.glsl" />
+    <None Include="..\assets\shaders\console.vert.glsl" />
     <None Include="..\assets\shaders\simple.frag.glsl" />
     <None Include="..\assets\shaders\simple.vert.glsl" />
     <None Include="..\src\gfx\README.md" />
@@ -20,6 +22,7 @@
     <ClInclude Include="..\src\common.h" />
     <ClInclude Include="..\src\config.h" />
     <ClInclude Include="..\src\core.h" />
+    <ClInclude Include="..\src\features\flat_world.h" />
     <ClInclude Include="..\src\features\handlers.h" />
     <ClInclude Include="..\src\features\rooms\rooms.h" />
     <ClInclude Include="..\src\features\StandardCamera.h" />
@@ -35,10 +38,16 @@
     <ClInclude Include="..\src\gfx\Vertex.h" />
     <ClInclude Include="..\src\input\console.h" />
     <ClInclude Include="..\src\input\IInputHandler.h" />
+    <ClInclude Include="..\src\input\InputMapping.h" />
+    <ClInclude Include="..\src\input\InputText.h" />
+    <ClInclude Include="..\src\types.h" />
+    <ClInclude Include="..\src\util\signal.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\apps\app_simple.cpp" />
+    <ClCompile Include="..\src\apps\app_world.cpp" />
     <ClCompile Include="..\src\driver.cpp" />
+    <ClCompile Include="..\src\features\flat_world.cpp" />
     <ClCompile Include="..\src\features\handlers.cpp" />
     <ClCompile Include="..\src\features\rooms\rooms.cpp" />
     <ClCompile Include="..\src\features\StandardCamera.cpp" />
@@ -47,8 +56,12 @@
     <ClCompile Include="..\src\gfx\opengl4\gl.cpp" />
     <ClCompile Include="..\src\gfx\scene.cpp" />
     <ClCompile Include="..\src\gfx\shader.cpp" />
+    <ClCompile Include="..\src\gfx\Texture.cpp" />
     <ClCompile Include="..\src\gfx\Vertex.cpp" />
     <ClCompile Include="..\src\input\console.cpp" />
+    <ClCompile Include="..\src\input\InputMapping.cpp" />
+    <ClCompile Include="..\src\input\InputText.cpp" />
+    <ClCompile Include="..\src\types.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{55E833AF-9459-472B-8D2B-49992817F74D}</ProjectGuid>
@@ -92,7 +105,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)\..\vendor\lib\win_x64_vc120;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;SDL2.lib;SDL2_image.lib;assimp.lib;libyaml-cppmdd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glew32.lib;SDL2.lib;SDL2_image.lib;SDL2_ttf.lib;assimp.lib;libyaml-cppmdd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>ROBOCOPY "$(SolutionDir)\..\vendor\bin\win_x64_vc120" "$(OutDir)\" *.dll /njs /ndl /nfl /np /nc /ns
@@ -119,7 +132,7 @@ exit 0</Command>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;SDL2.lib;SDL2_image.lib;assimp.lib;libyaml-cppmd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glew32.lib;SDL2.lib;SDL2_image.lib;SDL2_ttf.lib;assimp.lib;libyaml-cppmd.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)\..\vendor\lib\win_x64_vc120;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>

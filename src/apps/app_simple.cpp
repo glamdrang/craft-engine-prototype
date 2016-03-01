@@ -7,6 +7,8 @@ class ExampleApp : public IApp
 	Window* _window;
 	StandardCamera _camera;
 
+	Console _console;
+
 	// TODO(Mason): Replace these with the full example scene manager
 	IAsset* _asset; // The one asset in our scene
 	GLint _shader; // The one shader in our scene
@@ -22,7 +24,7 @@ public:
 	virtual void event(SDL_Event& event);
 };
 
-#if defined(APP_SIMPLE)
+#if APP_SIMPLE
 IApp* new_App()
 {
 	return new ExampleApp();
@@ -48,6 +50,13 @@ void ExampleApp::init(Window* win)
 {
 	_window = win;
 
+	int width, height;
+	SDL_GetWindowSize(_window->sdlwindow, &width, &height);
+
+	_console.set_window(width, height);
+
+	_input_text = &_console.InputText;
+	_input_handlers.push_back((IInputHandler*) &_console.InputText);
 	_input_handlers.push_back((IInputHandler*) new WindowResizeHandler(_window));
 	_input_handlers.push_back((IInputHandler*) &_camera);
 
@@ -70,7 +79,11 @@ void ExampleApp::init(Window* win)
 
 void ExampleApp::draw()
 {
+	/* T:
+	Update our scene
+	*/
 	_camera.update();
+	_console.update();
 
 	/* T:
 	Here we set up the rendering state for this call. We do this every frame because it may have been
@@ -157,6 +170,11 @@ void ExampleApp::draw()
 	*/
 	glDisable(GL_CULL_FACE);
 	glDisable(GL_DEPTH_TEST);
+
+	/* T:
+	Here we render the console ontop of the window.
+	*/
+	_console.draw();
 }
 
 void ExampleApp::event(SDL_Event& event)

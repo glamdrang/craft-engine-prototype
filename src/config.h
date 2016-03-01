@@ -3,8 +3,8 @@
 /*
 	Choose which app to compile:
 */
-#define APP_SIMPLE 0
-#define APP_WORLD 1
+#define APP_SIMPLE 1
+#define APP_WORLD 0
 
 /******************************************************************************
 ** Options
