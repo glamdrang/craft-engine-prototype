@@ -1,4 +1,7 @@
+#include "common.h"
 #include "console.h"
+
+#include "Engine.h"
 
 Console::Console()
 {
@@ -38,12 +41,16 @@ void Console::set_window(int width, int height)
 	/**************************************************************************
 	Surface section
 	*/
-	if (_surface == nullptr)
+	if (_surface != nullptr)
 	{
 		SDL_FreeSurface(_surface);
 	}
 
-	_font = TTF_OpenFont("..\\assets\\VeraMono.ttf", 11);
+	std::string font_path = ASSETPATH(".\\VeraMono.ttf");
+	_font = TTF_OpenFont(font_path.c_str(), 11);
+	if (_font == nullptr)
+		return;
+
 	_font_height = TTF_FontLineSkip(_font);
 
 	Uint32 rmask, gmask, bmask, amask;
@@ -100,7 +107,7 @@ void Console::set_window(int width, int height)
 	/**************************************************************************
 	Opengl section - Shaders
 	*/
-	_gl_shader = LoadShader(_vert_shader.c_str(), _frag_shader.c_str());
+	_gl_shader = LoadShader(ASSETPATH(_vert_shader).c_str(), ASSETPATH(_frag_shader).c_str());
 
 	glUseProgram(_gl_shader);
 	glUniform1i(glGetUniformLocation(_gl_shader, "tex"), 79);
@@ -182,8 +189,8 @@ void Console::draw()
 	SDL_FreeSurface(text);
 	
 	current_rect.y -= (_font_height * 3);
-	int textIndex = _consoleLog.length() - 2;
-	int lastTextIndex = _consoleLog.length() - 2;
+	int textIndex = (int)_consoleLog.length() - 2;
+	int lastTextIndex = (int)_consoleLog.length() - 2;
 	while (current_rect.y >= 0 && textIndex > 1)
 	{
 		while (_consoleLog[textIndex] != '\n')

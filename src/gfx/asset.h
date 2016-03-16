@@ -41,4 +41,4 @@ public:
 /* 
  * Generates an asset from a file using AssImp and SDL_Image.
  */
-IAsset* AssetFromFile(std::string filename);
+EXPORTED IAsset* AssetFromFile(std::string filename);

@@ -1,21 +1,15 @@
 #pragma once
+#include "common.h"
 
-/*
-	Choose which app to compile:
-*/
-#define APP_SIMPLE 1
-#define APP_WORLD 0
+class Config
+{
+private:
+	friend Config* make_config(std::vector<std::string> paths, bool recurse_up_from_cwd);
+public:
+	std::string rootFile_path;
+	YAML::Node rootFile_rootNode;
 
-/******************************************************************************
-** Options
-******************************************************************************/
+	~Config();
+};
 
-/*
-	Enables the windowing manager main. Otherwise uses the console version.
-*/
-#define OPTION_MAIN_WINDOWING 1
-
-/*
-	Chooses which version of OpenGL to use (4 or 3).
-*/
-#define OPTION_OPENGL_VERSION 4
+Config* make_config(std::vector<std::string> paths, bool recurse_up_from_cwd = true);

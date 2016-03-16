@@ -1,8 +1,9 @@
-#include "../core.h"
-#include "../features/handlers.h"
-#include "../features/StandardCamera.h"
+#include "common.h"
+#include "core.h"
+#include "features/handlers.h"
+#include "features/StandardCamera.h"
 
-class ExampleApp : public IApp
+class ExampleGame : public IGame
 {
 	Window* _window;
 	StandardCamera _camera;
@@ -16,42 +17,47 @@ class ExampleApp : public IApp
 	IInputTextHandler *_input_text;
 	std::vector<IInputHandler*> _input_handlers;
 
-public:
-	virtual void window_spec(Uint32& sdl_flags, int& width, int& height, int& x, int& y, std::string& name);
+	std::vector<WindowDescription> _windows;
 
-	virtual void init(Window* win);
+public:
+	virtual std::vector<WindowDescription>& windows();
+
+	virtual void init();
 	virtual void draw();
 	virtual void event(SDL_Event& event);
+
+private:
+	ExampleGame();
+
+	friend int main(int argc, char** argv);
 };
 
-#if APP_SIMPLE
-IApp* new_App()
+ExampleGame::ExampleGame()
 {
-	return new ExampleApp();
+	WindowDescription desc;
+	desc.name = "example:main";
+	desc.title = "Simple App";
+	desc.gl_library_type = CONFIG_GFX_LIB_OGL4;
+	desc.sdl_flags = SDL_WINDOW_RESIZABLE;
+	desc.width = 1024;
+	desc.height = 768;
+	desc.x = -1;
+	desc.y = -1;
+
+	_windows.push_back(desc);
 }
 
-void del_App(IApp* app)
+std::vector<WindowDescription>& ExampleGame::windows()
 {
-	delete (ExampleApp*)app;
-}
-#endif
-
-void ExampleApp::window_spec(Uint32& sdl_flags, int& width, int& height, int& x, int& y, std::string& name)
-{
-	name = "Simple App";
-	sdl_flags = SDL_WINDOW_RESIZABLE;
-	width = 1024;
-	height = 768;
-	x = -1;
-	y = -1;
+	return _windows;
 }
 
-void ExampleApp::init(Window* win)
+void ExampleGame::init()
 {
-	_window = win;
+	_window = Engine::instance().windowGet("example:main");
 
 	int width, height;
-	SDL_GetWindowSize(_window->sdlwindow, &width, &height);
+	SDL_GetWindowSize(_window->sdlWindow, &width, &height);
 
 	_console.set_window(width, height);
 
@@ -68,16 +74,16 @@ void ExampleApp::init(Window* win)
 	LoadShader can be found in shader.h/cpp; it returns an opengl ShaderProgram
 	AssetFromFile (and the IAsset interface) can be found in asset.h/cpp
 	*/
-	_shader = LoadShader("..\\assets\\shaders\\simple.vert.glsl", "..\\assets\\shaders\\simple.frag.glsl");
+	_shader = LoadShader(ASSETPATH("shaders\\simple.vert.glsl").c_str(), ASSETPATH("shaders\\simple.frag.glsl").c_str());
 
-	_asset = AssetFromFile("..\\assets\\Banana.obj");
+	_asset = AssetFromFile(ASSETPATH("Banana.obj").c_str());
 
 	_asset->load(); // Load from disk into main memory
 	_asset->gl_load(); // Load from main memory to gpu memory
 	_asset->unload(); // Unload from main memory
 }
 
-void ExampleApp::draw()
+void ExampleGame::draw()
 {
 	/* T:
 	Update our scene
@@ -175,19 +181,28 @@ void ExampleApp::draw()
 	Here we render the console ontop of the window.
 	*/
 	_console.draw();
+
+	/* T:
+	Finally we use SDL to swap our render buffers.
+	*/
+	SDL_GL_SwapWindow(_window->sdlWindow);
 }
 
-void ExampleApp::event(SDL_Event& event)
+void ExampleGame::event(SDL_Event& event)
 {
 	if (_input_text != 0 && _input_text->is_text_sdl_event_handler_active())
 	{
-		_input_text->handel(event);
+		_input_text->handle(event);
 	}
 	else
 	{
 		for (auto it = _input_handlers.begin(); it != _input_handlers.end(); it++)
 		{
-			(*it)->handel(event);
+			(*it)->handle(event);
 		}
 	}
 }
+
+typedef ExampleGame MainGame;
+
+#include "main.inc"

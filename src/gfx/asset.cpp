@@ -1,3 +1,4 @@
+#include "common.h"
 #include "asset.h"
 
 #include <assimp/Importer.hpp>      // C++ importer interface

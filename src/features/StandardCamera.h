@@ -17,10 +17,10 @@ class StandardCamera : public ICamera, public IInputHandler
 
 	void buildViewMatrix();
 public:
-	StandardCamera();
+	EXPORTED StandardCamera();
 
 	// TODO(Mason): use scene system
-	void update();
+	EXPORTED void update();
 
-	virtual void handel(SDL_Event const& sdlevent);
+	virtual void handle(SDL_Event const& sdlevent);
 };

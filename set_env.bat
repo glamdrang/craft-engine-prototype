@@ -1,0 +1,1 @@
+setx OB1_STARTER_ENGINE %~dp0

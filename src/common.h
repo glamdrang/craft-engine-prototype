@@ -1,7 +1,39 @@
 #pragma once
+// Precompiled header file.
+/* T:
+	This is the precompiled header and must be include in all code files to function correctly. It
+	is also often included in all header files as well. It contains all shared code in the system.
+*/
 
-// Our includes
-#include "config.h"
+/******************************************************************************
+** Defines
+******************************************************************************/
+
+#if defined _WIN32 || defined __CYGWIN__
+#ifdef ENGINE_DLL
+#ifdef __GNUC__
+#define EXPORTED __attribute__ ((dllexport))
+#else
+#define EXPORTED __declspec(dllexport)
+#endif
+#else
+#ifdef __GNUC__
+#define EXPORTED __attribute__ ((dllimport))
+#else
+#define EXPORTED __declspec(dllimport)
+#endif
+#endif
+#else
+#if __GNUC__ >= 4
+#define EXPORTED __attribute__ ((visibility ("default")))
+#else
+#define EXPORTED
+#endif
+#endif
+
+/******************************************************************************
+** Includes
+******************************************************************************/
 
 // C++
 #include <string>
@@ -40,22 +72,13 @@
 #include <spdlog\spdlog.h>
 
 // Our includes
+#include "util/all.h"
+#include "ecs/core.h"
 #include "types.h"
-#include "util/signal.hpp"
 
 /******************************************************************************
 ** Simple Wrappers
 ******************************************************************************/
-
-/* T:
-Holds the SDL variables for a window and it's opengl context. This can be used to manage them via
-SDL.
-*/
-struct Window
-{
-	SDL_Window* sdlwindow;
-	SDL_GLContext glcontext;
-};
 
 /* T:
 SDL event handler wrapped in an interface (rather than a callback).
@@ -64,7 +87,7 @@ class IEventHandler
 {
 public:
 	// Handels an input event
-	virtual void handel(SDL_Event const& sdlevent) = 0;
+	virtual void handle(SDL_Event const& sdlevent) = 0;
 };
 
 /* T:

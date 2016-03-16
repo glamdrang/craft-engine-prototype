@@ -19,6 +19,9 @@
     <None Include="..\assets\shaders\console.frag.glsl">
       <Filter>assets/shaders</Filter>
     </None>
+    <None Include="Engine.props" />
+    <None Include="EngineDebug.props" />
+    <None Include="EngineRelease.props" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="assets/shaders">
@@ -32,9 +35,6 @@
     </Filter>
     <Filter Include="src\input">
       <UniqueIdentifier>{3dd53070-a710-434c-b6e8-616c50dff4b7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\apps">
-      <UniqueIdentifier>{b7b7d570-1dc4-44bb-ab3d-54d216961489}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\features">
       <UniqueIdentifier>{e01119fd-c7a3-4894-b01f-94307c5af0cd}</UniqueIdentifier>
@@ -50,6 +50,12 @@
     </Filter>
     <Filter Include="src\util">
       <UniqueIdentifier>{5455bc0f-01ab-43f5-badf-a10ed4f65add}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ecs">
+      <UniqueIdentifier>{47d54a9c-d691-4905-8c10-6833af945267}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\assets">
+      <UniqueIdentifier>{9057a928-9352-470c-8da9-8365f8daf2f9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -73,9 +79,6 @@
     </ClInclude>
     <ClInclude Include="..\src\input\console.h">
       <Filter>src\input</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\config.h">
-      <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\src\features\StandardCamera.h">
       <Filter>src\features</Filter>
@@ -122,11 +125,42 @@
     <ClInclude Include="..\src\util\signal.hpp">
       <Filter>src\util</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\Engine.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\IGame.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\main.inc" />
+    <ClInclude Include="..\src\ecs\core.h">
+      <Filter>src\ecs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ecs\entity.h">
+      <Filter>src\ecs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ecs\IComponentManager.h">
+      <Filter>src\ecs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ecs\managers.h">
+      <Filter>src\ecs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ecs\System.h">
+      <Filter>src\ecs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\util\all.h">
+      <Filter>src\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\util\path.h">
+      <Filter>src\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\config.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\assets\assets.h">
+      <Filter>src\assets</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\driver.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\gfx\asset.cpp">
       <Filter>src\gfx</Filter>
     </ClCompile>
@@ -141,9 +175,6 @@
     </ClCompile>
     <ClCompile Include="..\src\input\console.cpp">
       <Filter>src\input</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\apps\app_simple.cpp">
-      <Filter>src\apps</Filter>
     </ClCompile>
     <ClCompile Include="..\src\features\StandardCamera.cpp">
       <Filter>src\features</Filter>
@@ -163,9 +194,6 @@
     <ClCompile Include="..\src\features\flat_world.cpp">
       <Filter>src\features</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\apps\app_world.cpp">
-      <Filter>src\apps</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\gfx\Texture.cpp">
       <Filter>src\gfx</Filter>
     </ClCompile>
@@ -177,6 +205,31 @@
     </ClCompile>
     <ClCompile Include="..\src\input\InputText.cpp">
       <Filter>src\input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Engine.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameBase.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ecs\entity.cpp">
+      <Filter>src\ecs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ecs\managers.cpp">
+      <Filter>src\ecs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ecs\System.cpp">
+      <Filter>src\ecs</Filter>
+    </ClCompile>
+    <ClCompile Include="pre_compiled_common.cpp" />
+    <ClCompile Include="..\src\util\path_windows.cpp">
+      <Filter>src\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\config.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\assets\assets.cpp">
+      <Filter>src\assets</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

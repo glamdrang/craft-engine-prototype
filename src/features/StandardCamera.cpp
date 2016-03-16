@@ -1,3 +1,4 @@
+#include "common.h"
 #include "StandardCamera.h"
 
 float const c_move(0.05f), c_turn(0.002f);
@@ -48,7 +49,7 @@ void StandardCamera::buildViewMatrix()
 	this->matrix_view = glm::lookAt(this->position, this->position - this->vec_look, this->vec_up);
 }
 
-void StandardCamera::handel(SDL_Event const& sdlevent)
+void StandardCamera::handle(SDL_Event const& sdlevent)
 {
 
 	switch (sdlevent.type)

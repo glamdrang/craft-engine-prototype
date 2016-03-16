@@ -1,5 +1,5 @@
 #pragma once
-#include "../common.h"
+#include "../core.h"
 
 /******************************************************************************
 ** WindowResizeHandler
@@ -11,9 +11,7 @@ private:
 	Window* const _window;
 
 public:
-	WindowResizeHandler(Window* window)
-		: _window(window)
-	{ }
+	EXPORTED WindowResizeHandler(Window* window);
 
-	virtual void handel(SDL_Event const& sdlevent);
+	virtual void handle(SDL_Event const& sdlevent);
 };

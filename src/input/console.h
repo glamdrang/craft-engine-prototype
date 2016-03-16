@@ -12,26 +12,26 @@ class Console
 
 	SDL_Surface* _surface;
 	TTF_Font* _font;
-	size_t _font_height;
+	int _font_height;
 
 	GLuint _gl_tex_id;
 	GLuint _gl_shader;
 	GLuint _gl_vao, _gl_vao_vbo, _gl_vao_ibo;
 
 	const std::string
-		_vert_shader = "..\\assets\\shaders\\console.vert.glsl",
-		_frag_shader = "..\\assets\\shaders\\console.frag.glsl";
+		_vert_shader = "shaders\\console.vert.glsl",
+		_frag_shader = "shaders\\console.frag.glsl";
 
 	SDL_Rect _rect;
 public:
 	InputText InputText;
 
-	Console();
+	EXPORTED Console();
 
-	void append_text(std::string const &t);
+	EXPORTED void append_text(std::string const &t);
 
-	void set_window(int width, int height);
+	EXPORTED void set_window(int width, int height);
 
-	void update();
-	void draw();
+	EXPORTED void update();
+	EXPORTED void draw();
 };
