@@ -9,12 +9,12 @@
 
 #include "yaml-cpp/dll.h"
 #include "yaml-cpp/node/ptr.h"
+#include <cstddef>
 #include <iterator>
 #include <memory>
 #include <map>
 #include <utility>
 #include <vector>
-#include <cstddef>
 
 namespace YAML {
 namespace detail {
@@ -133,6 +133,12 @@ class node_iterator_base
         break;
     }
     return *this;
+  }
+
+  node_iterator_base<V> operator++(int) {
+    node_iterator_base<V> iterator_pre(*this);
+    ++(*this);
+    return iterator_pre;
   }
 
   value_type operator*() const {

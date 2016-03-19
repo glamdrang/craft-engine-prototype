@@ -10,8 +10,8 @@
 #include "yaml-cpp/dll.h"
 #include "yaml-cpp/node/ptr.h"
 #include "yaml-cpp/node/detail/node_iterator.h"
-#include <iterator>
 #include <cstddef>
+#include <iterator>
 
 namespace YAML {
 namespace detail {
@@ -52,6 +52,12 @@ class iterator_base : public std::iterator<std::forward_iterator_tag, V,
   iterator_base<V>& operator++() {
     ++m_iterator;
     return *this;
+  }
+
+  iterator_base<V> operator++(int) {
+    iterator_base<V> iterator_pre(*this);
+    ++(*this);
+    return iterator_pre;
   }
 
   template <typename W>
