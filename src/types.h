@@ -54,7 +54,7 @@ public:
 		std::string name;
 	};
 
-	virtual std::vector<CompositeListing const> const& CompositeType_values() const = 0;
+	virtual std::vector<CompositeListing> const& CompositeType_values() const = 0;
 	void* CompositeType_nextObject;
 
 	inline bool CompositeType_has(std::string const& name)
@@ -100,7 +100,7 @@ public:
 		std::function<AbstractTypeTag* (std::vector<AbstractTypeTag*>)> call;
 	};
 
-	virtual std::vector<FeatureListing const> const& FeaturesType_values() const = 0;
+	virtual std::vector<FeatureListing> const& FeaturesType_values() const = 0;
 	void* FeaturesType_nextObject;
 
 	inline bool FeaturesType_has(std::string const& name)
@@ -131,14 +131,14 @@ class GenericComplexType :
 	public IFeaturesType,
 	public virtual AbstractTypeTag
 {
-	std::vector < CompositeListing const > _composite_listing;
-	std::vector < FeatureListing const > _features_listing;
+	std::vector < CompositeListing > _composite_listing;
+	std::vector < FeatureListing > _features_listing;
 
 public:
 	GenericComplexType();
 
-	virtual std::vector<CompositeListing const> const& CompositeType_values() const;
-	virtual std::vector<FeatureListing const> const& FeaturesType_values() const;
+	virtual std::vector<CompositeListing> const& CompositeType_values() const;
+	virtual std::vector<FeatureListing> const& FeaturesType_values() const;
 
 	// True if success
 	bool CompositeType_add(std::string const& name, AbstractTypeTag const& tag);

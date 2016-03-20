@@ -9,12 +9,12 @@ GenericComplexType::GenericComplexType()
 	FeaturesType_nextObject = nullptr;
 }
 
-std::vector<ICompositeType::CompositeListing const> const& GenericComplexType::CompositeType_values() const
+std::vector<ICompositeType::CompositeListing> const& GenericComplexType::CompositeType_values() const
 {
 	return this->_composite_listing;
 }
 
-std::vector<IFeaturesType::FeatureListing const> const& GenericComplexType::FeaturesType_values() const
+std::vector<IFeaturesType::FeatureListing> const& GenericComplexType::FeaturesType_values() const
 {
 	return this->_features_listing;
 }
