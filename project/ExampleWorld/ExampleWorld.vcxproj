@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
@@ -13,18 +13,19 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{1222392F-17E4-4A8B-8A04-6D7771021F76}</ProjectGuid>
     <RootNamespace>ExampleWorld</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.10586.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -47,17 +48,17 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <SDLCheck>true</SDLCheck>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>common.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)Common.pch</PrecompiledHeaderOutputFile>
+      <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>ROBOCOPY "$(SolutionDir)\..\vendor\bin\win_x64_vc120" "$(OutDir)\" *.dll /njs /ndl /nfl /np /nc /ns
+      <Command>ROBOCOPY "$(EngineDir)\vendor\bin\win_x64_vc140" "$(OutDir)\" *.dll /njs /ndl /nfl /np /nc /ns
 
 set rce=%errorlevel%
 if not %rce% LSS 4 exit %rce%
@@ -71,10 +72,10 @@ exit 0</Command>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>common.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(ProjectDir)Common.pch</PrecompiledHeaderOutputFile>
+      <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -83,7 +84,7 @@ exit 0</Command>
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>ROBOCOPY "$(SolutionDir)\..\vendor\bin\win_x64_vc120" "$(OutDir)\" *.dll /njs /ndl /nfl /np /nc /ns
+      <Command>ROBOCOPY "$(EngineDir)\vendor\bin\win_x64_vc140" "$(OutDir)\" *.dll /njs /ndl /nfl /np /nc /ns
 
 set rce=%errorlevel%
 if not %rce% LSS 4 exit %rce%
@@ -102,6 +103,9 @@ exit 0</Command>
     <ProjectReference Include="..\OpenGL4Starter.vcxproj">
       <Project>{55e833af-9459-472b-8d2b-49992817f74d}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\apps\app_world\world.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

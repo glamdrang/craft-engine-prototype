@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
@@ -28,7 +28,6 @@
     <ClInclude Include="..\src\core.h" />
     <ClInclude Include="..\src\ecs\core.h" />
     <ClInclude Include="..\src\ecs\entity.h" />
-    <ClInclude Include="..\src\ecs\IComponentManager.h" />
     <ClInclude Include="..\src\ecs\managers.h" />
     <ClInclude Include="..\src\ecs\System.h" />
     <ClInclude Include="..\src\Engine.h" />
@@ -55,13 +54,11 @@
     <ClInclude Include="..\src\util\all.h" />
     <ClInclude Include="..\src\util\path.h" />
     <ClInclude Include="..\src\util\signal.hpp" />
+    <ClInclude Include="..\src\util\templates.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\assets\assets.cpp" />
     <ClCompile Include="..\src\config.cpp" />
-    <ClCompile Include="..\src\ecs\entity.cpp" />
-    <ClCompile Include="..\src\ecs\managers.cpp" />
-    <ClCompile Include="..\src\ecs\System.cpp" />
     <ClCompile Include="..\src\GameBase.cpp" />
     <ClCompile Include="..\src\util\path_windows.cpp" />
     <ClCompile Include="pre_compiled_common.cpp">
@@ -91,18 +88,19 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{55E833AF-9459-472B-8D2B-49992817F74D}</ProjectGuid>
     <RootNamespace>OpenGL4Starter</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.10586.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -132,20 +130,20 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <SDLCheck>true</SDLCheck>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
       <PreprocessorDefinitions>ENGINE_DLL;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>common.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)Common.pch</PrecompiledHeaderOutputFile>
+      <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>Shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>ROBOCOPY "$(EngineDir)\vendor\bin\win_x64_vc120" "$(OutDir)\" *.dll /njs /ndl /nfl /np /nc /ns
+      <Command>ROBOCOPY "$(EngineDir)\vendor\bin\win_x64_vc140" "$(OutDir)\" *.dll /njs /ndl /nfl /np /nc /ns
 
 set rce=%errorlevel%
 if not %rce% LSS 4 exit %rce%
@@ -159,13 +157,13 @@ exit 0</Command>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
       <PreprocessorDefinitions>ENGINE_DLL;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>common.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(ProjectDir)Common.pch</PrecompiledHeaderOutputFile>
+      <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -174,7 +172,7 @@ exit 0</Command>
       <AdditionalDependencies>Shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>ROBOCOPY "$(EngineDir)\vendor\bin\win_x64_vc120" "$(OutDir)\" *.dll /njs /ndl /nfl /np /nc /ns
+      <Command>ROBOCOPY "$(EngineDir)\vendor\bin\win_x64_vc140" "$(OutDir)\" *.dll /njs /ndl /nfl /np /nc /ns
 
 set rce=%errorlevel%
 if not %rce% LSS 4 exit %rce%
