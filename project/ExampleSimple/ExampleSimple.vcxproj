@@ -100,7 +100,7 @@ exit 0</Command>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OpenGL4Starter.vcxproj">
+    <ProjectReference Include="..\CraftEnginePrototype.vcxproj">
       <Project>{55e833af-9459-472b-8d2b-49992817f74d}</Project>
     </ProjectReference>
   </ItemGroup>
