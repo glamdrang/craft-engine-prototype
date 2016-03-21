@@ -105,6 +105,7 @@ exit 0</Command>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\src\apps\app_world\core.h" />
     <ClInclude Include="..\..\src\apps\app_world\world.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

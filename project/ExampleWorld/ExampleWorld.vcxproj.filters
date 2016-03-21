@@ -6,5 +6,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\apps\app_world\world.h" />
+    <ClInclude Include="..\..\src\apps\app_world\core.h" />
   </ItemGroup>
 </Project>

@@ -60,9 +60,9 @@ WorldGame::WorldGame()
 		;
 
 	CTransform t0_ = {};
-	t0_.pos.x = 1.1;
+	t0_.pos.x = 1.1f;
 	world.c_set(e0, t0_);
-	t0_.pos.x = 5.5; // Should not update
+	t0_.pos.x = 5.5f; // Should not update
 	t0_ = world.c_get<CTransform>(e0);
 
 	auto t0a = &world.c<CTransform>(e0);
@@ -76,22 +76,22 @@ WorldGame::WorldGame()
 		<< "    t0_.pos.x                           == 1.1: " << (float)t0_.pos.x << std::endl
 		;
 
-	t0a->pos.x = 2.2;
+	t0a->pos.x = 2.2f;
 
 	std::cerr << "    **** 1 `auto x = &w.c`" << std::endl
 		<< "    world.c<CTransform>(e0).pos.x       == 2.2: " << (float)world.c<CTransform>(e0).pos.x << std::endl
 		;
 
-	t0b.pos.x = 3.3;
+	t0b.pos.x = 3.3f;
 
 	std::cerr << "    **** 2 `auto x = &w.c`" << std::endl
 		<< "    world.c<CTransform>(e0).pos.x       == 3.3: " << (float)world.c<CTransform>(e0).pos.x << std::endl
 		;
 
-	t0c.pos.x = 4.4;
+	t0c.pos.x = 4.4f;
 
 	std::cerr << "    **** 3 `auto x = &w.c`" << std::endl
-		<< "    world.c<CTransform>(e0).pos.x       == 4.4: " << (float)world.c<CTransform>(e0).pos.x << std::endl
+		<< "    world.c<CTransform>(e0).pos.x       != 4.4: " << (float)world.c<CTransform>(e0).pos.x << std::endl
 		;
 
 	world.c_rem<CTransform>(e0);
@@ -174,5 +174,4 @@ void WorldGame::event(SDL_Event& event)
 }
 
 typedef WorldGame MainGame;
-
 #include "main.inc"

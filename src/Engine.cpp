@@ -51,7 +51,7 @@ void Engine::_main()
 
 Engine::Engine()
 {
-
+	this->_types = new TypesEcs();
 }
 
 Engine& Engine::instance()

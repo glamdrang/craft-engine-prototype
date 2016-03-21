@@ -4,6 +4,8 @@
 #include "config.h"
 #include "assets/assets.h"
 
+using namespace engine::types;
+
 /******************************************************************************
 ** Forward Declare Engine Parts
 ******************************************************************************/
@@ -38,6 +40,7 @@ private:
 	friend int main(int argc, char** argv);
 
 	IGame* _game;
+	TypesEcs* _types;
 	Config* _config;
 
 	Assets* _assets;
@@ -54,6 +57,7 @@ public:
 	*/
 	EXPORTED static Engine& instance();
 	inline IGame* game() { return _game; }
+	inline TypesEcs* types() { return _types; }
 	inline Config* config() { return _config; }
 
 	inline Assets* assets() { return _assets; }

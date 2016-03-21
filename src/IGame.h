@@ -9,7 +9,7 @@
 /* T:
 Describes the interface for the games used by this teaching engine.
 */
-class IGame : public AbstractTypeTag
+class IGame
 {
 public:
 	virtual std::vector<WindowDescription>& windows() = 0;

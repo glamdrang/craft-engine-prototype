@@ -6,7 +6,7 @@
 namespace ecs
 {
 	template<
-		typename TEntityAllocator
+		typename TEntityAllocator = SimpleEntityAllocator
 	>
 	class SystemConfig
 	{

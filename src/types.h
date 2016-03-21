@@ -2,147 +2,93 @@
 
 #include "common.h"
 
-/* T:
-Describes our descoverable types.
-*/
+#include "ecs/core.h"
 
-enum TypeTag
-{
-	TypeTag_Unknown = 0,
+namespace engine {
+namespace types {
 
-	// These are type flags
-	/* T:
-	Describes a complex composite object which contains other types.
-	*/
-	TypeTag_FlagComposite = 1,
-
-	/* T:
-	Describes a complex object exposing dynamic features.
-	*/
-	TypeTag_FlagFeatures = 2,
-
-	/* T:
-	Anything >= this value is not a flagged value.
-	*/
-	TypeTag_NOTFLAGGED = 16,
-
-	/* T:
-	Describes special value string:
-	*/
-	TypeTag_SpecialLiteralString = 16,
-
-	// Actual type list, see the corresponding interfaces.
-
-	TypeTag_InputMapping = 32, // IInputMapping
-	TypeTag_Asset = 33, // IAsset
-
-	TypeTag_USER = 1024, // First User Section
-};
-
-struct AbstractTypeTag
-{
-	TypeTag type;
-	void* object;
-};
-
-class ICompositeType abstract : public virtual AbstractTypeTag
-{
-public:
-	struct CompositeListing
+	class IObject
 	{
-		AbstractTypeTag const* tag;
-		std::string name;
+	public:
+		static constexpr auto c_obj_interfaceName = "IObject";
+
+		virtual ~IObject();
+
+		virtual ecs::EntityId object_type() = 0;
+		virtual std::string object_name() = 0;
 	};
 
-	virtual std::vector<CompositeListing> const& CompositeType_values() const = 0;
-	void* CompositeType_nextObject;
-
-	inline bool CompositeType_has(std::string const& name)
+	class IObjectComposite : public virtual IObject
 	{
-		auto values = this->CompositeType_values();
-		for (auto l = values.begin(); l != values.end(); l++)
+	public:
+		static constexpr auto c_obj_interfaceName = "IObjectComposite";
+
+		struct Listing
 		{
-			if (name == l->name)
-				return true;
-		}
-		return false;
-	}
+			std::string name;
+		};
 
-	inline AbstractTypeTag const* CompositeType_get(std::string const& name)
-	{
-		auto values = this->CompositeType_values();
-		for (auto l = values.begin(); l != values.end(); l++)
-		{
-			if (name == l->name)
-				return l->tag;
-		}
-		return nullptr;
-	}
-};
+		virtual std::vector<IObject*> const& objectComposite_parts() const;
+		virtual Listing const& objectComposite_getListing(IObject const*) const;
 
-class IFeaturesType abstract : public virtual AbstractTypeTag
-{
-public:
-	struct FeatureArgumentListing
-	{
-		std::string name;
-		std::string description;
+		/* T:
+		Provides the objectComposite's signal for when the parts collection is updated. It has a
+		couple of different call styles:
+
+			* Add new object: when (objNew != nullptr, objOld == nullptr).
+			* Rem old object: when (objNew == nullptr, objOld != nullptr).
+			* Replace object: when (objNew == nullptr, objOld == nullptr). Replaces old with new.
+		*/
+		virtual Signal<void (IObject* objNew, IObject* objOld)>& objectComposite_onUpdate() = 0;
 	};
 
-	struct FeatureListing
+	class IObjectManipulation : public virtual IObject
 	{
-		std::string name;
-		std::string description;
+	public:
+		static constexpr auto c_obj_interfaceName = "IObjectManipulation";
 
-		FeatureArgumentListing ret;
-		std::vector<FeatureArgumentListing> args;
+		typedef void* listingId_t;
+		struct Listing
+		{
+			listingId_t id;
+			std::string name;
+			ecs::EntityId ret;
+			std::vector<ecs::EntityId> args;
+		};
 
-		std::function<AbstractTypeTag* (std::vector<AbstractTypeTag*>)> call;
+		virtual IObject* objectManipulation_call(listingId_t, std::vector<IObject*> const&) const = 0;
+		virtual std::vector<Listing> const& objectManipulation_listings(IObject const*) const = 0;
 	};
 
-	virtual std::vector<FeatureListing> const& FeaturesType_values() const = 0;
-	void* FeaturesType_nextObject;
-
-	inline bool FeaturesType_has(std::string const& name)
+	template<class TType>
+	struct CTypeInterfaceDescriptor
 	{
-		auto values = this->FeaturesType_values();
-		for (auto l = values.begin(); l != values.end(); l++)
-		{
-			if (name == l->name)
-				return true;
-		}
-		return false;
-	}
+		static constexpr auto c_ecs_componentName = TType::c_obj_interfaceName;
 
-	inline FeatureListing const* FeaturesType_get(std::string const& name)
+		ptrdiff_t offset;
+
+		inline TType* cast(IObject* o) const
+		{
+			return reinterpret_cast<TType*>(reinterpret_cast<std::uintptr_t>(o) + offset);
+		}
+		inline TType const* cast(IObject const* o) const
+		{
+			return reinterpret_cast<TType const*>(reinterpret_cast<std::uintptr_t>(o) + offset);
+		}
+	};
+
+	template<class TType>
+	using
+		InterfaceManager = ecs::FastComponentManager<CTypeInterfaceDescriptor<TType>>;
+
+	class TypesEcs : public ecs::System<
+		ecs::SystemConfig<>,
+		InterfaceManager<IObjectComposite>,
+		InterfaceManager<IObjectManipulation>
+	>
 	{
-		auto values = this->FeaturesType_values();
-		for (auto l = values.begin(); l != values.end(); l++)
-		{
-			if (name == l->name)
-				return &(*l);
-		}
-		return nullptr;
-	}
-};
 
-class GenericComplexType :
-	public ICompositeType,
-	public IFeaturesType,
-	public virtual AbstractTypeTag
-{
-	std::vector < CompositeListing > _composite_listing;
-	std::vector < FeatureListing > _features_listing;
+	};
 
-public:
-	GenericComplexType();
-
-	virtual std::vector<CompositeListing> const& CompositeType_values() const;
-	virtual std::vector<FeatureListing> const& FeaturesType_values() const;
-
-	// True if success
-	bool CompositeType_add(std::string const& name, AbstractTypeTag const& tag);
-	bool CompositeType_remove(std::string const& name);
-	bool FeaturesType_add(FeatureListing const& listing);
-	bool FeaturesType_remove(std::string const& name);
-};
+}
+}

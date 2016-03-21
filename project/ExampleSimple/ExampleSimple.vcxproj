@@ -104,6 +104,9 @@ exit 0</Command>
       <Project>{55e833af-9459-472b-8d2b-49992817f74d}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\apps\app_simple.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

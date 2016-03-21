@@ -4,4 +4,7 @@
     <ClCompile Include="..\..\src\apps\app_simple.cpp" />
     <ClCompile Include="..\pre_compiled_common.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\apps\app_simple.h" />
+  </ItemGroup>
 </Project>
