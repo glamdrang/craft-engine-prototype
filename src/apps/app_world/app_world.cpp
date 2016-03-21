@@ -52,40 +52,54 @@ WorldGame::WorldGame()
 	ecs::EntityId e0 = world.e();
 	
 	std::cerr << "world tests:" << std::endl
-		<< "    managers							== 2:	" << world.managerCount() << std::endl
-		<< "    entities							== 1:	" << world.entityCount() << std::endl
-		<< "    world.e_has(e0)						== 1:	" << world.e_has(e0) << std::endl
-		<< "    world.c_has<CTransform>(e0)			== 0:	" << world.c_has<CTransform>(e0) << std::endl
+		<< "    managers                            == 2:   " << world.managerCount() << std::endl
+		<< "    entities                            == 1:   " << world.entityCount() << std::endl
+		<< "    world.e_has(e0)                     == 1:   " << world.e_has(e0) << std::endl
+		<< "    world.c_has<CTransform>(e0)         == 0:   " << world.c_has<CTransform>(e0) << std::endl
 		//<< "    world.c_has<CPhysics>(e0): " << world.c_has<CPhysics>(e0) << std::endl // Should error
 		;
 
 	CTransform t0_ = {};
-	t0_.pos.x = 1.0;
+	t0_.pos.x = 1.1;
 	world.c_set(e0, t0_);
-	t0_.pos.x = 5.0; // Should not update
-
-	auto t0 = world.c<CTransform>(e0);
-
-	std::cerr << "    **** 0" << std::endl
-		<< "    world.c_has<CTransform>(e0)			== 1:	" << world.c_has<CTransform>(e0) << std::endl
-		<< "    world.c<CTransform>(e0).pos.x		== 1.0: " << world.c<CTransform>(e0).pos.x << std::endl
-		<< "    world.c_get<CTransform>(e0).pos.x	== 1.0: " << world.c_get<CTransform>(e0).pos.x << std::endl
-		;
-
-	t0.pos.x = 2.0;
+	t0_.pos.x = 5.5; // Should not update
 	t0_ = world.c_get<CTransform>(e0);
 
-	std::cerr << "    **** 1" << std::endl
-		<< "    world.c<CTransform>(e0).pos.x		== 2.0:	" << world.c<CTransform>(e0).pos.x << std::endl
-		<< "    t0_.pos.x							== 2.0:	" << t0_.pos.x << std::endl
+	auto t0a = &world.c<CTransform>(e0);
+	auto& t0b = world.c<CTransform>(e0);
+	auto t0c = world.c<CTransform>(e0);
+
+	std::cerr << "    **** 0" << std::endl
+		<< "    world.c_has<CTransform>(e0)         == 1:   " << world.c_has<CTransform>(e0) << std::endl
+		<< "    world.c<CTransform>(e0).pos.x       == 1.1: " << (float)world.c<CTransform>(e0).pos.x << std::endl
+		<< "    world.c_get<CTransform>(e0).pos.x   == 1.1: " << (float)world.c_get<CTransform>(e0).pos.x << std::endl
+		<< "    t0_.pos.x                           == 1.1: " << (float)t0_.pos.x << std::endl
+		;
+
+	t0a->pos.x = 2.2;
+
+	std::cerr << "    **** 1 `auto x = &w.c`" << std::endl
+		<< "    world.c<CTransform>(e0).pos.x       == 2.2: " << (float)world.c<CTransform>(e0).pos.x << std::endl
+		;
+
+	t0b.pos.x = 3.3;
+
+	std::cerr << "    **** 2 `auto x = &w.c`" << std::endl
+		<< "    world.c<CTransform>(e0).pos.x       == 3.3: " << (float)world.c<CTransform>(e0).pos.x << std::endl
+		;
+
+	t0c.pos.x = 4.4;
+
+	std::cerr << "    **** 3 `auto x = &w.c`" << std::endl
+		<< "    world.c<CTransform>(e0).pos.x       == 4.4: " << (float)world.c<CTransform>(e0).pos.x << std::endl
 		;
 
 	world.c_rem<CTransform>(e0);
 	world.e_rem(e0);
 
-	std::cerr << "    **** 2" << std::endl
-		<< "    world.c_has<CTransform>(e0)			== 0:	" << world.c_has<CTransform>(e0) << std::endl
-		<< "    entities							== 0:	" << world.entityCount() << std::endl
+	std::cerr << "    **** 4" << std::endl
+		<< "    world.c_has<CTransform>(e0)         == 0:   " << world.c_has<CTransform>(e0) << std::endl
+		<< "    entities                            == 0:   " << world.entityCount() << std::endl
 		;
 }
 
