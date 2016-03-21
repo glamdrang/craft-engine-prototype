@@ -3,6 +3,8 @@
 #include "features/handlers.h"
 #include "features/StandardCamera.h"
 
+#include "world.h"
+
 class WorldGame : public IGame
 {
 	Window* _window;
@@ -16,6 +18,9 @@ class WorldGame : public IGame
 	std::vector<IInputHandler*> _input_handlers;
 
 	std::vector<WindowDescription> _windows;
+
+public:
+	ExampleWorld_ECS world;
 
 public:
 	virtual std::vector<WindowDescription>& windows();
@@ -43,6 +48,45 @@ WorldGame::WorldGame()
 	desc.y = -1;
 
 	_windows.push_back(desc);
+
+	ecs::EntityId e0 = world.e();
+	
+	std::cerr << "world tests:" << std::endl
+		<< "    managers							== 2:	" << world.managerCount() << std::endl
+		<< "    entities							== 1:	" << world.entityCount() << std::endl
+		<< "    world.e_has(e0)						== 1:	" << world.e_has(e0) << std::endl
+		<< "    world.c_has<CTransform>(e0)			== 0:	" << world.c_has<CTransform>(e0) << std::endl
+		//<< "    world.c_has<CPhysics>(e0): " << world.c_has<CPhysics>(e0) << std::endl // Should error
+		;
+
+	CTransform t0_ = {};
+	t0_.pos.x = 1.0;
+	world.c_set(e0, t0_);
+	t0_.pos.x = 5.0; // Should not update
+
+	auto t0 = world.c<CTransform>(e0);
+
+	std::cerr << "    **** 0" << std::endl
+		<< "    world.c_has<CTransform>(e0)			== 1:	" << world.c_has<CTransform>(e0) << std::endl
+		<< "    world.c<CTransform>(e0).pos.x		== 1.0: " << world.c<CTransform>(e0).pos.x << std::endl
+		<< "    world.c_get<CTransform>(e0).pos.x	== 1.0: " << world.c_get<CTransform>(e0).pos.x << std::endl
+		;
+
+	t0.pos.x = 2.0;
+	t0_ = world.c_get<CTransform>(e0);
+
+	std::cerr << "    **** 1" << std::endl
+		<< "    world.c<CTransform>(e0).pos.x		== 2.0:	" << world.c<CTransform>(e0).pos.x << std::endl
+		<< "    t0_.pos.x							== 2.0:	" << t0_.pos.x << std::endl
+		;
+
+	world.c_rem<CTransform>(e0);
+	world.e_rem(e0);
+
+	std::cerr << "    **** 2" << std::endl
+		<< "    world.c_has<CTransform>(e0)			== 0:	" << world.c_has<CTransform>(e0) << std::endl
+		<< "    entities							== 0:	" << world.entityCount() << std::endl
+		;
 }
 
 std::vector<WindowDescription>& WorldGame::windows()
@@ -57,7 +101,7 @@ void WorldGame::init()
 	_input_handlers.push_back((IInputHandler*) new WindowResizeHandler(_window));
 	_input_handlers.push_back((IInputHandler*)&_camera);
 
-	_shader = LoadShader("..\\assets\\shaders\\simple.vert.glsl", "..\\assets\\shaders\\simple.frag.glsl");
+	_shader = LoadShader(ASSETPATH("shaders\\simple.vert.glsl").c_str(), ASSETPATH("shaders\\simple.frag.glsl").c_str());
 
 	//_world_texture = LoadTexture();
 }

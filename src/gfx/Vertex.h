@@ -22,13 +22,13 @@ public:
 	// Element for this recursive definition
 	T elem;
 
-	const static size_t T_elem_count = _T_elem_count<T, Ts...>::count;
+	const static size_t T_elemCount = sizeof...(Ts) + 1;
 
 	// Gets a value from the vertex by index
 	// Base case
 	template <size_t k>
-	typename std::enable_if<k == T_elem_count - 1,
-		typename _T_elem_index<0, T, Ts...>::type&
+	typename std::enable_if<k == T_elemCount - 1,
+		typename T&
 	>::type
 	get() {
 		return this->elem;
@@ -37,8 +37,8 @@ public:
 	// Gets a value from the vertex by index
 	// General case
 	template <size_t k>
-	typename std::enable_if<(2 <= T_elem_count && k <= T_elem_count - 2),
-		typename _T_elem_index<(T_elem_count - 1) - k, T, Ts...>::type&
+	typename std::enable_if<(2 <= T_elemCount && k <= T_elemCount - 2),
+		typename _T_elemIndex<(T_elemCount - 1) - k, T, Ts...>::type&
 	>::type
 	get() {
 		return Vertex<Ts...>::get<k>();
@@ -47,11 +47,11 @@ public:
 	// Gets a value from the vertex by index
 	// Error case
 	template <size_t k>
-	typename std::enable_if<T_elem_count <= k,
-		typename _T_elem_index<k, T, Ts...>::type&
+	typename std::enable_if<T_elemCount <= k,
+		void
 	>::type
 	get() {
-		assert(k < T_elem_count);
+		assert(k < T_elemCount);
 	}
 };
 
