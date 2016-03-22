@@ -33,7 +33,12 @@ While this may not be finished in being applied, this is the official coding sta
   
 ## Design
 
-We use defines (from the config file) to determine which app gets built and hence fill the `new_App` and `del_App` functions. The driver provides various `main` functions (for example the graphical windows `main`).
+There are 4 layers to this engine, as described below:
+
+* **Environment** (layer 0): The OS and hardware of the client and/or build machine. We mostly ignore this by abstracting it behind a couple of prototypical platform configuraitons.
+* **Programming System** (layer 1): The compiler, programming language, utility libraries, and simple third party libraries. These are all the things which we use to build the engine and are shared by the engine and the game. This is basically everything in the `common.h` file (e.g. the util folder, the ecs, and a some special files). Libraries like `format` (from `spdlog`), `glm` (used as our internal vector library), and `yaml-cpp`.
+* **Engine Features** (layer 2): This is the bulk of the code in the Engine library. Engine features are implemented using, essentially, a DSL constructed out of other parts. Engine features often wrap larger libraries. Libraries like `GL`, `SDL2` and `AssImp`.
+* **Game** (layer 3): This is the place where the engine is used by a user of the system. Custom engine features can still be added of course, but they would be on the boundry between the layers.
 
 ## Files
 
@@ -48,3 +53,4 @@ We use defines (from the config file) to determine which app gets built and henc
 * `gfx`: Graphics; asset loading, scene system, opengl rendering.
 * `input`: SDL interaction, controller support, system console.
 * `features`: Features combining many subsystems.
+* `util`: Features combining many subsystems.
