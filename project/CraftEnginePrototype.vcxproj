@@ -60,6 +60,7 @@
     <ClCompile Include="..\src\assets\assets.cpp" />
     <ClCompile Include="..\src\config.cpp" />
     <ClCompile Include="..\src\GameBase.cpp" />
+    <ClCompile Include="..\src\util\path.cpp" />
     <ClCompile Include="..\src\util\path_windows.cpp" />
     <ClCompile Include="pre_compiled_common.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -159,7 +160,7 @@ exit 0</Command>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
-      <PreprocessorDefinitions>ENGINE_DLL;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ENGINE_DLL;_MBCS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>common.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(ProjectDir)Common.pch</PrecompiledHeaderOutputFile>

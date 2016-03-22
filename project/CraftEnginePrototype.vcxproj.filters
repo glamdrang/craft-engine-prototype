@@ -222,5 +222,8 @@
     <ClCompile Include="..\src\assets\assets.cpp">
       <Filter>src\assets</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\util\path.cpp">
+      <Filter>src\util</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

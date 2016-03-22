@@ -19,6 +19,12 @@ std::string path::join(std::string const& first, std::string const& second_)
 	return std::string(out_buffer);
 }
 
+std::string path::normalize(std::string const& path)
+{
+	// TODO actually normalize
+	return path;
+}
+
 std::string path::dir(std::string const& path)
 {
 	std::vector<char> buffer(path.begin(), path.end());
@@ -36,4 +42,22 @@ bool path::exists(std::string const& path)
 {
 	// TODO: determine file or dir and check dir existence
 	return PathFileExists(path.c_str()) == TRUE;
+}
+
+std::vector<std::string> path::list_dirs(std::string const& path)
+{
+	std::vector<std::string> ret;
+
+	// TODO actually list
+
+	return ret;
+}
+
+std::vector<std::string> path::list_files(std::string const& path)
+{
+	std::vector<std::string> ret;
+
+	// TODO actually list
+
+	return ret;
 }

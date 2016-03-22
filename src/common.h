@@ -42,6 +42,7 @@
 #include <vector>
 #include <map>
 #include <algorithm>
+#include <stack>
 
 // SDL
 #define SDL_MAIN_HANDLED
