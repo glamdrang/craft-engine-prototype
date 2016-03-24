@@ -2,6 +2,10 @@
 
 #include "common.h"
 
+/* T:
+This describes the engine subsystems.
+*/
+
 #include "input/IInputHandler.h"
 #include "input/console.h"
 
@@ -9,12 +13,11 @@
 #include "gfx/shader.h"
 #include "gfx/asset.h"
 
-/* T:
-Describes the contents of driver.cpp (containing main), includes the interfaces for Game and Engine
-classes and other engine headers and features, along with some utility classes.
+#include "features/handlers.h"
+#include "features/StandardCamera.h"
 
-This file describes the global application structures, as well as how the driver interacts with
-the user's application code.
+/* T:
+This describes the core engine singleton, tying togeather all of the above.
 */
 
 #include "Engine.h"

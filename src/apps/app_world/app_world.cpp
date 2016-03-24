@@ -1,9 +1,5 @@
 #include "common.h"
 #include "core.h"
-#include "features/handlers.h"
-#include "features/StandardCamera.h"
-
-#include "world.h"
 
 class WorldGame : public IGame
 {

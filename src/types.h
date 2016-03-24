@@ -28,8 +28,8 @@ namespace types {
 			std::string name;
 		};
 
-		virtual std::vector<IObject*> const& objectComposite_parts() const;
-		virtual Listing const& objectComposite_getListing(IObject const*) const;
+		virtual std::vector<IObject*> const& objectComposite_parts() const = 0;
+		virtual Listing const& objectComposite_getListing(IObject const*) const = 0;
 
 		/* T:
 		Provides the objectComposite's signal for when the parts collection is updated. It has a

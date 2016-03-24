@@ -159,6 +159,12 @@
     <ClInclude Include="..\src\util\templates.h">
       <Filter>src\util</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\input\types.h">
+      <Filter>src\input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\input\conversions.h">
+      <Filter>src\input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\gfx\asset.cpp">
@@ -224,6 +230,9 @@
     </ClCompile>
     <ClCompile Include="..\src\util\path.cpp">
       <Filter>src\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\input\conversions.cpp">
+      <Filter>src\input</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

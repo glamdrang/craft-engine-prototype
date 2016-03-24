@@ -47,9 +47,11 @@
     <ClInclude Include="..\src\gfx\Vertex.h" />
     <ClInclude Include="..\src\IGame.h" />
     <ClInclude Include="..\src\input\console.h" />
+    <ClInclude Include="..\src\input\conversions.h" />
     <ClInclude Include="..\src\input\IInputHandler.h" />
     <ClInclude Include="..\src\input\InputMapping.h" />
     <ClInclude Include="..\src\input\InputText.h" />
+    <ClInclude Include="..\src\input\types.h" />
     <ClInclude Include="..\src\types.h" />
     <ClInclude Include="..\src\util\all.h" />
     <ClInclude Include="..\src\util\path.h" />
@@ -60,6 +62,7 @@
     <ClCompile Include="..\src\assets\assets.cpp" />
     <ClCompile Include="..\src\config.cpp" />
     <ClCompile Include="..\src\GameBase.cpp" />
+    <ClCompile Include="..\src\input\conversions.cpp" />
     <ClCompile Include="..\src\util\path.cpp" />
     <ClCompile Include="..\src\util\path_windows.cpp" />
     <ClCompile Include="pre_compiled_common.cpp">

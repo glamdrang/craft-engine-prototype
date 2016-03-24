@@ -136,18 +136,6 @@ struct WindowDescription
 	int y;
 };
 
-/* T:
-Holds the SDL variables for a window and it's opengl context. This can be used to manage them via
-SDL.
-*/
-struct Window
-{
-	Window() : sdlWindow(nullptr), glContext(nullptr) { }
-
-	SDL_Window* sdlWindow;
-	SDL_GLContext glContext;
-};
-
 /******************************************************************************
 ** Engine Parts Include
 ******************************************************************************/

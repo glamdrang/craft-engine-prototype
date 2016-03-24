@@ -22,6 +22,7 @@ struct CRenderable
 struct CPhysics
 {
 	static constexpr auto c_ecs_componentName = "physics";
+	glm::vec3 vel;
 };
 
 struct CConfig
@@ -33,6 +34,7 @@ struct CConfig
 class ExampleWorld_ECS : public ecs::System <
 	ecs::SystemConfig<ecs::SimpleEntityAllocator>,
 	ecs::FastComponentManager<CTransform>,
+	ecs::FastComponentManager<CPhysics>,
 	ecs::MapComponentManager<CConfig>
 >
 {

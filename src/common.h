@@ -92,5 +92,13 @@ public:
 };
 
 /* T:
-SDL event handler wrapped in an interface (rather than a callback).
+Holds the SDL variables for a window and it's opengl context. This can be used to manage them via
+SDL.
 */
+struct Window
+{
+	Window() : sdlWindow(nullptr), glContext(nullptr) { }
+
+	SDL_Window* sdlWindow;
+	SDL_GLContext glContext;
+};
