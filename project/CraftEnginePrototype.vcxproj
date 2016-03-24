@@ -15,79 +15,79 @@
     <None Include="..\assets\shaders\console.vert.glsl" />
     <None Include="..\assets\shaders\simple.frag.glsl" />
     <None Include="..\assets\shaders\simple.vert.glsl" />
-    <None Include="..\src\gfx\README.md" />
-    <None Include="..\src\README.md" />
+    <None Include="..\src\craft\gfx\README.md" />
+    <None Include="..\src\craft\README.md" />
     <None Include="Engine.props" />
     <None Include="EngineDebug.props" />
     <None Include="EngineRelease.props" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\assets\assets.h" />
-    <ClInclude Include="..\src\common.h" />
-    <ClInclude Include="..\src\config.h" />
-    <ClInclude Include="..\src\core.h" />
-    <ClInclude Include="..\src\ecs\core.h" />
-    <ClInclude Include="..\src\ecs\entity.h" />
-    <ClInclude Include="..\src\ecs\managers.h" />
-    <ClInclude Include="..\src\ecs\System.h" />
-    <ClInclude Include="..\src\Engine.h" />
-    <ClInclude Include="..\src\features\flat_world.h" />
-    <ClInclude Include="..\src\features\handlers.h" />
-    <ClInclude Include="..\src\features\rooms\rooms.h" />
-    <ClInclude Include="..\src\features\StandardCamera.h" />
-    <ClInclude Include="..\src\gfx\asset.h" />
-    <ClInclude Include="..\src\gfx\camera.h" />
-    <ClInclude Include="..\src\gfx\gl.h" />
-    <ClInclude Include="..\src\gfx\Mesh.hpp" />
-    <ClInclude Include="..\src\gfx\scene.h" />
-    <ClInclude Include="..\src\gfx\shader.h" />
-    <ClInclude Include="..\src\gfx\Shader.hpp" />
-    <ClInclude Include="..\src\gfx\Texture.h" />
-    <ClInclude Include="..\src\gfx\Triangle.hpp" />
-    <ClInclude Include="..\src\gfx\Vertex.h" />
-    <ClInclude Include="..\src\IGame.h" />
-    <ClInclude Include="..\src\input\console.h" />
-    <ClInclude Include="..\src\input\conversions.h" />
-    <ClInclude Include="..\src\input\IInputHandler.h" />
-    <ClInclude Include="..\src\input\InputMapping.h" />
-    <ClInclude Include="..\src\input\InputText.h" />
-    <ClInclude Include="..\src\input\types.h" />
-    <ClInclude Include="..\src\types.h" />
-    <ClInclude Include="..\src\util\all.h" />
-    <ClInclude Include="..\src\util\path.h" />
-    <ClInclude Include="..\src\util\signal.hpp" />
-    <ClInclude Include="..\src\util\templates.h" />
+    <ClInclude Include="..\src\craft\assets\assets.h" />
+    <ClInclude Include="..\src\craft\common.h" />
+    <ClInclude Include="..\src\craft\config.h" />
+    <ClInclude Include="..\src\craft\core.h" />
+    <ClInclude Include="..\src\craft\ecs\core.h" />
+    <ClInclude Include="..\src\craft\ecs\entity.h" />
+    <ClInclude Include="..\src\craft\ecs\managers.h" />
+    <ClInclude Include="..\src\craft\ecs\System.h" />
+    <ClInclude Include="..\src\craft\Engine.h" />
+    <ClInclude Include="..\src\craft\features\flat_world.h" />
+    <ClInclude Include="..\src\craft\features\handlers.h" />
+    <ClInclude Include="..\src\craft\features\rooms\rooms.h" />
+    <ClInclude Include="..\src\craft\features\StandardCamera.h" />
+    <ClInclude Include="..\src\craft\gfx\asset.h" />
+    <ClInclude Include="..\src\craft\gfx\camera.h" />
+    <ClInclude Include="..\src\craft\gfx\gl.h" />
+    <ClInclude Include="..\src\craft\gfx\Mesh.hpp" />
+    <ClInclude Include="..\src\craft\gfx\scene.h" />
+    <ClInclude Include="..\src\craft\gfx\shader.h" />
+    <ClInclude Include="..\src\craft\gfx\Shader.hpp" />
+    <ClInclude Include="..\src\craft\gfx\Texture.h" />
+    <ClInclude Include="..\src\craft\gfx\Triangle.hpp" />
+    <ClInclude Include="..\src\craft\gfx\Vertex.h" />
+    <ClInclude Include="..\src\craft\IGame.h" />
+    <ClInclude Include="..\src\craft\input\console.h" />
+    <ClInclude Include="..\src\craft\input\conversions.h" />
+    <ClInclude Include="..\src\craft\input\IInputHandler.h" />
+    <ClInclude Include="..\src\craft\input\InputMapping.h" />
+    <ClInclude Include="..\src\craft\input\InputText.h" />
+    <ClInclude Include="..\src\craft\input\types.h" />
+    <ClInclude Include="..\src\craft\types.h" />
+    <ClInclude Include="..\src\craft\util\all.h" />
+    <ClInclude Include="..\src\craft\util\path.h" />
+    <ClInclude Include="..\src\craft\util\signal.hpp" />
+    <ClInclude Include="..\src\craft\util\templates.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\assets\assets.cpp" />
-    <ClCompile Include="..\src\config.cpp" />
-    <ClCompile Include="..\src\GameBase.cpp" />
-    <ClCompile Include="..\src\input\conversions.cpp" />
-    <ClCompile Include="..\src\util\path.cpp" />
-    <ClCompile Include="..\src\util\path_windows.cpp" />
+    <ClCompile Include="..\src\craft\assets\assets.cpp" />
+    <ClCompile Include="..\src\craft\config.cpp" />
+    <ClCompile Include="..\src\craft\GameBase.cpp" />
+    <ClCompile Include="..\src\craft\input\conversions.cpp" />
+    <ClCompile Include="..\src\craft\util\path.cpp" />
+    <ClCompile Include="..\src\craft\util\path_windows.cpp" />
     <ClCompile Include="pre_compiled_common.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClInclude Include="..\src\main.inc">
+    <ClInclude Include="..\src\craft\main.inc">
       <FileType>CppCode</FileType>
     </ClInclude>
-    <ClCompile Include="..\src\Engine.cpp" />
-    <ClCompile Include="..\src\features\flat_world.cpp" />
-    <ClCompile Include="..\src\features\handlers.cpp" />
-    <ClCompile Include="..\src\features\rooms\rooms.cpp" />
-    <ClCompile Include="..\src\features\StandardCamera.cpp" />
-    <ClCompile Include="..\src\gfx\asset.cpp" />
-    <ClCompile Include="..\src\gfx\camera.cpp" />
-    <ClCompile Include="..\src\gfx\opengl4\gl.cpp" />
-    <ClCompile Include="..\src\gfx\scene.cpp" />
-    <ClCompile Include="..\src\gfx\shader.cpp" />
-    <ClCompile Include="..\src\gfx\Texture.cpp" />
-    <ClCompile Include="..\src\gfx\Vertex.cpp" />
-    <ClCompile Include="..\src\input\console.cpp" />
-    <ClCompile Include="..\src\input\InputMapping.cpp" />
-    <ClCompile Include="..\src\input\InputText.cpp" />
-    <ClCompile Include="..\src\types.cpp" />
+    <ClCompile Include="..\src\craft\Engine.cpp" />
+    <ClCompile Include="..\src\craft\features\flat_world.cpp" />
+    <ClCompile Include="..\src\craft\features\handlers.cpp" />
+    <ClCompile Include="..\src\craft\features\rooms\rooms.cpp" />
+    <ClCompile Include="..\src\craft\features\StandardCamera.cpp" />
+    <ClCompile Include="..\src\craft\gfx\asset.cpp" />
+    <ClCompile Include="..\src\craft\gfx\camera.cpp" />
+    <ClCompile Include="..\src\craft\gfx\opengl4\gl.cpp" />
+    <ClCompile Include="..\src\craft\gfx\scene.cpp" />
+    <ClCompile Include="..\src\craft\gfx\shader.cpp" />
+    <ClCompile Include="..\src\craft\gfx\Texture.cpp" />
+    <ClCompile Include="..\src\craft\gfx\Vertex.cpp" />
+    <ClCompile Include="..\src\craft\input\console.cpp" />
+    <ClCompile Include="..\src\craft\input\InputMapping.cpp" />
+    <ClCompile Include="..\src\craft\input\InputText.cpp" />
+    <ClCompile Include="..\src\craft\types.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{55E833AF-9459-472B-8D2B-49992817F74D}</ProjectGuid>
@@ -138,7 +138,7 @@
       </AdditionalUsingDirectories>
       <PreprocessorDefinitions>ENGINE_DLL;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>common.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>craft/common.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)Common.pch</PrecompiledHeaderOutputFile>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
@@ -165,7 +165,7 @@ exit 0</Command>
       </AdditionalUsingDirectories>
       <PreprocessorDefinitions>ENGINE_DLL;_MBCS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>common.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>craft/common.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(ProjectDir)Common.pch</PrecompiledHeaderOutputFile>
       <SDLCheck>true</SDLCheck>
     </ClCompile>

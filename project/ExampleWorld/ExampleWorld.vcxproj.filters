@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="..\..\src\apps\app_world\app_world.cpp" />
+    <ClCompile Include="..\..\src\craft\apps\app_world\app_world.cpp" />
     <ClCompile Include="..\pre_compiled_common.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\src\apps\app_world\world.h" />
-    <ClInclude Include="..\..\src\apps\app_world\core.h" />
+    <ClInclude Include="..\..\src\craft\apps\app_world\world.h" />
+    <ClInclude Include="..\..\src\craft\apps\app_world\core.h" />
   </ItemGroup>
 </Project>

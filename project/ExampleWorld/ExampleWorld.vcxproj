@@ -49,7 +49,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>common.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>craft/common.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)Common.pch</PrecompiledHeaderOutputFile>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
@@ -73,7 +73,7 @@ exit 0</Command>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>common.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>craft/common.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(ProjectDir)Common.pch</PrecompiledHeaderOutputFile>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
@@ -93,7 +93,7 @@ exit 0</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\apps\app_world\app_world.cpp" />
+    <ClCompile Include="..\..\src\craft\apps\app_world\app_world.cpp" />
     <ClCompile Include="..\pre_compiled_common.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -105,8 +105,8 @@ exit 0</Command>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\src\apps\app_world\core.h" />
-    <ClInclude Include="..\..\src\apps\app_world\world.h" />
+    <ClInclude Include="..\..\src\craft\apps\app_world\core.h" />
+    <ClInclude Include="..\..\src\craft\apps\app_world\world.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

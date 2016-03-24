@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <None Include="..\src\README.md">
+    <None Include="..\src\craft\README.md">
       <Filter>src</Filter>
     </None>
-    <None Include="..\src\gfx\README.md">
+    <None Include="..\src\craft\gfx\README.md">
       <Filter>src\gfx</Filter>
     </None>
     <None Include="..\assets\shaders\simple.vert.glsl">
@@ -59,179 +59,179 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\common.h">
+    <ClInclude Include="..\src\craft\common.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\core.h">
+    <ClInclude Include="..\src\craft\core.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\gfx\asset.h">
+    <ClInclude Include="..\src\craft\gfx\asset.h">
       <Filter>src\gfx</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\gfx\camera.h">
+    <ClInclude Include="..\src\craft\gfx\camera.h">
       <Filter>src\gfx</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\gfx\scene.h">
+    <ClInclude Include="..\src\craft\gfx\scene.h">
       <Filter>src\gfx</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\gfx\shader.h">
+    <ClInclude Include="..\src\craft\gfx\shader.h">
       <Filter>src\gfx</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\input\console.h">
+    <ClInclude Include="..\src\craft\input\console.h">
       <Filter>src\input</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\features\StandardCamera.h">
+    <ClInclude Include="..\src\craft\features\StandardCamera.h">
       <Filter>src\features</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\input\IInputHandler.h">
+    <ClInclude Include="..\src\craft\input\IInputHandler.h">
       <Filter>src\input</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\features\handlers.h">
+    <ClInclude Include="..\src\craft\features\handlers.h">
       <Filter>src\features</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\features\rooms\rooms.h">
+    <ClInclude Include="..\src\craft\features\rooms\rooms.h">
       <Filter>src\features\rooms</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\gfx\Mesh.hpp">
+    <ClInclude Include="..\src\craft\gfx\Mesh.hpp">
       <Filter>src\gfx</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\gfx\gl.h">
+    <ClInclude Include="..\src\craft\gfx\gl.h">
       <Filter>src\gfx</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\gfx\Shader.hpp">
+    <ClInclude Include="..\src\craft\gfx\Shader.hpp">
       <Filter>src\gfx</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\gfx\Triangle.hpp">
+    <ClInclude Include="..\src\craft\gfx\Triangle.hpp">
       <Filter>src\gfx</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\gfx\Vertex.h">
+    <ClInclude Include="..\src\craft\gfx\Vertex.h">
       <Filter>src\gfx</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\features\flat_world.h">
+    <ClInclude Include="..\src\craft\features\flat_world.h">
       <Filter>src\features</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\gfx\Texture.h">
+    <ClInclude Include="..\src\craft\gfx\Texture.h">
       <Filter>src\gfx</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\types.h">
+    <ClInclude Include="..\src\craft\types.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\input\InputMapping.h">
+    <ClInclude Include="..\src\craft\input\InputMapping.h">
       <Filter>src\input</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\input\InputText.h">
+    <ClInclude Include="..\src\craft\input\InputText.h">
       <Filter>src\input</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\util\signal.hpp">
+    <ClInclude Include="..\src\craft\util\signal.hpp">
       <Filter>src\util</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Engine.h">
+    <ClInclude Include="..\src\craft\Engine.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\IGame.h">
+    <ClInclude Include="..\src\craft\IGame.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\main.inc" />
-    <ClInclude Include="..\src\ecs\core.h">
+    <ClInclude Include="..\src\craft\main.inc" />
+    <ClInclude Include="..\src\craft\ecs\core.h">
       <Filter>src\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\ecs\entity.h">
+    <ClInclude Include="..\src\craft\ecs\entity.h">
       <Filter>src\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\ecs\managers.h">
+    <ClInclude Include="..\src\craft\ecs\managers.h">
       <Filter>src\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\ecs\System.h">
+    <ClInclude Include="..\src\craft\ecs\System.h">
       <Filter>src\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\util\all.h">
+    <ClInclude Include="..\src\craft\util\all.h">
       <Filter>src\util</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\util\path.h">
+    <ClInclude Include="..\src\craft\util\path.h">
       <Filter>src\util</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\config.h">
+    <ClInclude Include="..\src\craft\config.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\assets\assets.h">
+    <ClInclude Include="..\src\craft\assets\assets.h">
       <Filter>src\assets</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\util\templates.h">
+    <ClInclude Include="..\src\craft\util\templates.h">
       <Filter>src\util</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\input\types.h">
+    <ClInclude Include="..\src\craft\input\types.h">
       <Filter>src\input</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\input\conversions.h">
+    <ClInclude Include="..\src\craft\input\conversions.h">
       <Filter>src\input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\gfx\asset.cpp">
+    <ClCompile Include="..\src\craft\gfx\asset.cpp">
       <Filter>src\gfx</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\gfx\camera.cpp">
+    <ClCompile Include="..\src\craft\gfx\camera.cpp">
       <Filter>src\gfx</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\gfx\scene.cpp">
+    <ClCompile Include="..\src\craft\gfx\scene.cpp">
       <Filter>src\gfx</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\gfx\shader.cpp">
+    <ClCompile Include="..\src\craft\gfx\shader.cpp">
       <Filter>src\gfx</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\input\console.cpp">
+    <ClCompile Include="..\src\craft\input\console.cpp">
       <Filter>src\input</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\features\StandardCamera.cpp">
+    <ClCompile Include="..\src\craft\features\StandardCamera.cpp">
       <Filter>src\features</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\features\handlers.cpp">
+    <ClCompile Include="..\src\craft\features\handlers.cpp">
       <Filter>src\features</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\features\rooms\rooms.cpp">
+    <ClCompile Include="..\src\craft\features\rooms\rooms.cpp">
       <Filter>src\features\rooms</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\gfx\opengl4\gl.cpp">
+    <ClCompile Include="..\src\craft\gfx\opengl4\gl.cpp">
       <Filter>src\gfx\opengl4</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\gfx\Vertex.cpp">
+    <ClCompile Include="..\src\craft\gfx\Vertex.cpp">
       <Filter>src\gfx</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\features\flat_world.cpp">
+    <ClCompile Include="..\src\craft\features\flat_world.cpp">
       <Filter>src\features</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\gfx\Texture.cpp">
+    <ClCompile Include="..\src\craft\gfx\Texture.cpp">
       <Filter>src\gfx</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\types.cpp">
+    <ClCompile Include="..\src\craft\types.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\input\InputMapping.cpp">
+    <ClCompile Include="..\src\craft\input\InputMapping.cpp">
       <Filter>src\input</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\input\InputText.cpp">
+    <ClCompile Include="..\src\craft\input\InputText.cpp">
       <Filter>src\input</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Engine.cpp">
+    <ClCompile Include="..\src\craft\Engine.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\GameBase.cpp">
+    <ClCompile Include="..\src\craft\GameBase.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="pre_compiled_common.cpp" />
-    <ClCompile Include="..\src\util\path_windows.cpp">
+    <ClCompile Include="..\src\craft\util\path_windows.cpp">
       <Filter>src\util</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\config.cpp">
+    <ClCompile Include="..\src\craft\config.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\assets\assets.cpp">
+    <ClCompile Include="..\src\craft\assets\assets.cpp">
       <Filter>src\assets</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\util\path.cpp">
+    <ClCompile Include="..\src\craft\util\path.cpp">
       <Filter>src\util</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\input\conversions.cpp">
+    <ClCompile Include="..\src\craft\input\conversions.cpp">
       <Filter>src\input</Filter>
     </ClCompile>
   </ItemGroup>
