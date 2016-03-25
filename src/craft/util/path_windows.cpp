@@ -27,15 +27,19 @@ std::string path::normalize(std::string const& path)
 
 std::string path::dir(std::string const& path)
 {
-	std::vector<char> buffer(path.begin(), path.end());
-	buffer.push_back('\0');
-	
-	BOOL res = PathRemoveFileSpec(buffer.data());
+	size_t clength = sizeof(char) * (path.size() + 1);
 
-	if (res != TRUE)
-		return std::string("");
+	char* buffer = (char*) malloc(clength);
+	memcpy(buffer, path.c_str(), clength);
 
-	return std::string(buffer.data());
+	BOOL res = PathRemoveFileSpec(buffer);
+
+	std::string ret("");
+	if (res == TRUE)
+		ret = buffer;
+
+	free(buffer);
+	return ret;
 }
 
 bool path::exists(std::string const& path)
